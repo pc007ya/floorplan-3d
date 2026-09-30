@@ -1,0 +1,10 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {readFile} from 'node:fs/promises';
+import {validateHome,scaledHome,compileHome} from '../js/compile-home.mjs';
+const h=JSON.parse(await readFile(new URL('../data/home.json',import.meta.url),'utf8'));
+test('source and uncertainty are preserved',()=>{validateHome(h);assert.equal(h.source.geometry,'IMG_6047.png');assert.equal(h.source.services,'IMG_6049.png');assert.equal(h.calibration.status,'unverified');assert.equal(h.source.originalImagesPublished,false)});
+test('7 doors and 11 zones; no invented bedroom furniture',()=>{assert.equal(h.doors.length,7);assert.equal(h.rooms.length,11);assert.ok(h.fixtures.every(f=>!['bed','sofa','table'].includes(f.type)));assert.equal(h.doors.filter(d=>d.entry).length,1)});
+test('traced door voids are not filled by full-height walls',()=>{for(const d of h.doors)for(const w of h.walls){const r=d.rect,dx=Math.min(r[2],w[2])-Math.max(r[0],w[0]),dy=Math.min(r[3],w[3])-Math.max(r[1],w[1]);assert.ok(dx<=0||dy<=0,`${d.name} intersects ${w}`)}});
+test('calibration scales geometry, not angles or vertical defaults',()=>{const a=scaledHome(h),b=structuredClone(h);b.calibration.mmPerTraceUnit*=2;const c=scaledHome(b);assert.equal(c.rooms[0].poly[0][0],a.rooms[0].poly[0][0]*2);assert.deepEqual(c.doors[0].c,a.doors[0].c);assert.equal(c.heightMm,a.heightMm);assert.equal(c.fixtures[0].rot,a.fixtures[0].rot)});
+test('reject invalid or incompatible inputs',()=>{assert.throws(()=>compileHome('<html>not the engine</html>',h));const b=structuredClone(h);b.calibration.mmPerTraceUnit=NaN;assert.throws(()=>validateHome(b))});
+let engine;try{engine=await readFile(new URL('../engine.html',import.meta.url),'utf8')}catch{}
+test('compile actual preserved upstream', {skip:!engine},()=>{const out=compileHome(engine,h);assert.ok(out.includes('window.__homeModel'));assert.ok(!out.includes('三室两厅两卫 · 装修设计'));assert.ok(out.includes('bay = r.bay === true'));assert.ok(!out.includes('[[10270,800,10510,2600], 2.4]'));assert.ok(out.includes('牆體結構未確認'));assert.ok(out.includes('home-trace-v1:12.5:2800'));assert.ok(out.includes('房間 A*'))});
