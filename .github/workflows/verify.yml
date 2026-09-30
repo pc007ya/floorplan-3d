@@ -12,6 +12,11 @@ jobs:
     timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
+      - name: Package exact source
+        run: |
+          mkdir -p artifacts
+          git archive --format=zip -o artifacts/source.zip HEAD
+          git rev-parse HEAD > artifacts/source-commit.txt
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
