@@ -66,6 +66,36 @@ export function compileHome(engine, input) {
     const mats=Object.entries(MATS).map(([k,m])=>'<button class="mat '+(k===st.mat?'on':'')+'" data-mat="'+k+'"><i style="background:'+m.sw+'"></i><span>'+nm(m.name)+'</span></button>').join('');
     return '<section><h3>區域屬性</h3><label>名稱<input id="rName" value="'+esc(st.name)+'"></label><p>模型面積 ≈ '+fmt(area(r.poly))+' m²（待校正）</p><p>暫定層高 ${h.heightMm} mm；不是實測高度。圖示材質只供視覺比較。</p></section><section><h3>地面材質（不估價）</h3><div class="mats">'+mats+'</div><button class="btn" id="back">回總覽</button></section>';
   }`,'room panel');
+  if (h.designV2?.profile === 'showhouse-public-v2') {
+    const s=h.calibration.mmPerTraceUnit, tv=h.designV2.publicArea.tvWall, ce=h.designV2.publicArea.ceiling;
+    const tvx=tv.x*s, tvy=tv.y*s, tvLen=tv.length*s, cx0=ce.x0*s, cy0=ce.y0*s, cx1=ce.x1*s, cy1=ce.y1*s;
+    const helper=`function buildShowhouseV2Decor(top){
+  const stoneCols=['#77746f','#6f6c68','#7e7a74','#72706d','#817d78'];
+  const vh=Math.min(${tv.heightM},top), seg=${tvLen/1000}/5;
+  if(vh>.15){
+    for(let i=0;i<5;i++) archUp.add(box(.035,vh,seg-.012,mat(stoneCols[i],{roughness:.34}),wx(${tvx}),0,wz(${tvy})+(i-2)*seg));
+    archUp.add(box(.28,.18,${(tvLen/1000)*.78},mat('#272626',{roughness:.36}),wx(${tvx})-.16,.24,wz(${tvy})));
+    archUp.add(box(.015,.018,${(tvLen/1000)*.72},glowMat('#fff0d6','#ffd79c',1.1),wx(${tvx})-.31,.21,wz(${tvy})));
+  }
+  if(top>=H-.01){
+    const x0=wx(${cx0}),x1=wx(${cx1}),z0=wz(${cy0}),z1=wz(${cy1}),w=x1-x0,d=z1-z0,b=${ce.soffitM},drop=${ce.dropM};
+    const y=H-drop, soff=mat('#f2f0eb',{roughness:.95}), glow=glowMat('#fff4de','#ffd8a0',.9);
+    archUp.add(box(w,drop,b,soff,(x0+x1)/2,y,z0+b/2),box(w,drop,b,soff,(x0+x1)/2,y,z1-b/2));
+    archUp.add(box(b,drop,d-2*b,soff,x0+b/2,y,(z0+z1)/2),box(b,drop,d-2*b,soff,x1-b/2,y,(z0+z1)/2));
+    const inset=b+.04;
+    archUp.add(box(w-2*inset,.012,.018,glow,(x0+x1)/2,H-drop-.015,z0+inset));
+    archUp.add(box(w-2*inset,.012,.018,glow,(x0+x1)/2,H-drop-.015,z1-inset));
+    archUp.add(box(.018,.012,d-2*inset,glow,x0+inset,H-drop-.015,(z0+z1)/2));
+    archUp.add(box(.018,.012,d-2*inset,glow,x1-inset,H-drop-.015,(z0+z1)/2));
+    [[.28,.28],[.72,.28],[.28,.72],[.72,.72]].forEach(([ax,az])=>{const p=new THREE.PointLight(0xffdfb0,.42,4.4,1.8);p.position.set(x0+w*ax,H-.42,z0+d*az);lampG.add(p);});
+  }
+}
+`;
+    if (!src.includes('function buildArch(){')) throw Error('Engine adapter: buildArch missing for V2 decor');
+    src=src.replace('function buildArch(){',helper+'function buildArch(){');
+    if (!src.includes('  const top = opt.cut;')) throw Error('Engine adapter: cut height missing for V2 decor');
+    src=src.replace('  const top = opt.cut;','  const top = opt.cut; buildShowhouseV2Decor(top);');
+  }
   replace(/const OX = 6000, OY = 5300, H = 2\.8, FOV = 45;/,`const OX = ${cx}, OY = ${cy}, H = ${H}, FOV = 45;`,'origin / height');
   replace(/const opt = \{cut:2\.8,/,`const opt = {cut:1.2,`,'default cutaway');
   replace(/bay = r\.counted === false/,`bay = r.bay === true`,'exterior is not raised bay');
