@@ -1,0 +1,13 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+import {bathroomConfig} from '../js/bathrooms-v23.mjs';
+import {compileHome} from '../js/compile-scene.mjs';
+const home=JSON.parse(await readFile('data/home.json','utf8'));
+const engine=await readFile('engine.html','utf8');
+test('V2.3 never modifies base geometry or existing fixture anchors',()=>{const before=JSON.stringify(home);const out=compileHome(engine,home);assert.equal(JSON.stringify(home),before);assert.match(out,/bathrooms-v23/);assert.match(out,/installBathrooms/);assert.match(out,/Reflector/)});
+test('wall finishes are only known room-facing wall / opening surfaces',()=>{const c=bathroomConfig(home);assert.equal(c.rooms.length,3);for(const r of c.rooms){assert.ok(r.surfaces.length>=5);for(const e of r.surfaces){assert.ok(e.hi>e.lo&&e.head>e.bottom);assert.match(e.source,/^(wall|window-sill|window-head|door-head)-/);assert.ok([1,-1].includes(e.sign))}}});
+test('scale changes horizontal geometry, not physical vertical assumptions',()=>{const h=structuredClone(home),a=bathroomConfig(h);h.calibration.mmPerTraceUnit*=2;const b=bathroomConfig(h);assert.equal(b.rooms[0].front,a.rooms[0].front*2);assert.equal(b.assumptions.glassHeightM,a.assumptions.glassHeightM)});
+test('shower proposals do not intersect existing device footprints',()=>{const c=bathroomConfig(home),s=home.calibration.mmPerTraceUnit;for(const r of c.rooms)for(const f of home.fixtures.filter(f=>r.fixtureIds.includes(f.id))){const a=f.rot*Math.PI/180,halfY=(Math.abs(Math.sin(a))*f.w+Math.abs(Math.cos(a))*f.d)*s/2;assert.ok(Math.abs(r.front-f.cy*s)>halfY+10,`${r.id}: ${f.id}`)}});
+test('cladding does not close bath entrance below the door head',()=>{const c=bathroomConfig(home),s=home.calibration.mmPerTraceUnit;for(const r of c.rooms){const d=home.doors.find(d=>d.name.includes('衛浴 '+r.label)),D=d.rect.map(x=>x*s);for(const e of r.surfaces.filter(e=>e.axis===0&&e.bottom<home.doorHeadMm/1000)){if(e.fixed>=D[0]-65&&e.fixed<=D[2]+65)assert.ok(Math.min(e.hi,D[3])-Math.max(e.lo,D[1])<=1)}}});
+test('public floor and all bedroom names remain unchanged',()=>{for(const r of home.rooms.filter(r=>['open','a','b','c'].includes(r.id)))assert.equal(r.mat,'tile800');assert.ok(home.rooms.find(r=>r.id==='a').name.includes('房間 A'))});

@@ -1,28 +1,28 @@
 <!doctype html>
-<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>室內設計 3D｜比例草模</title>
+<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>室內設計 3D｜V2.3 衛浴試配</title>
 <style>
 *{box-sizing:border-box}body{margin:0;color:#223039;background:#f3f1eb;font:14px/1.5 system-ui,-apple-system,"PingFang TC",sans-serif;height:100dvh;display:flex;flex-direction:column}header{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 18px;background:#19343b;color:#fff}h1{font-size:18px;margin:0}header p{margin:0;font-size:12px;color:#c7d3d4}.tag{font-size:12px;background:#f4db9f;color:#573e19;border-radius:30px;padding:3px 9px}.spacer{flex:1}button{border:1px solid #cad0cf;border-radius:7px;background:#fff;color:#253a40;padding:7px 10px;font:inherit;cursor:pointer}button:hover{background:#edf2ef}input{width:106px;border:1px solid #bbc5c6;border-radius:5px;padding:6px;font:inherit}#toolbar{padding:9px 18px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;border-bottom:1px solid #d8dcd7;background:#fffdf7;font-size:12px}#status{margin:0;padding:7px 18px;background:#fff0ce;border-bottom:1px solid #dbc89e;font-size:12px}#status.error{background:#fde2df;color:#7e221f}iframe{flex:1;width:100%;min-height:0;border:0}dialog{border:1px solid #bbc8c5;border-radius:12px;max-width:660px;max-height:85vh;padding:24px}dialog::backdrop{background:#10262a88}dialog h2{margin-top:0}dialog p{font-size:14px}footer{padding:4px 18px;background:#edf0eb;font-size:11px;color:#5d706d}a{color:#23636e}#download:disabled{opacity:.4;cursor:wait}@media(max-width:650px){header{padding:9px 12px;gap:8px}header p{display:none}#toolbar{padding:7px 12px}#toolbar label{font-size:11px}footer{display:none}}
 </style></head><body>
-<header><div><h1>室內設計 3D</h1><p>你的圖面 → 可旋轉、縮放、漫遊的空間</p></div><span class="tag">比例草模・尚未校正</span><span class="spacer"></span><button id="notes">建模依據</button><button id="download" disabled>匯出 3D 網頁</button></header>
+<header><div><h1>室內設計 3D｜V2.3</h1><p>你的圖面 → 可旋轉、縮放、漫遊的空間</p></div><span class="tag">比例草模・尚未校正</span><span class="spacer"></span><button id="notes">建模依據</button><button id="download" disabled>匯出網頁（需網路）</button></header>
 <div id="toolbar"><label>下方兩柱中心距（mm） <input id="distance" type="number" min="2000" max="40000" step="1" placeholder="待提供實測值"></label><label>暫定層高（mm） <input id="height" type="number" min="2200" max="4200" step="10" value="2800"></label><button id="calibrate">套用校正</button><span>未輸入實測值前，不可把畫面尺寸當成實際尺寸。</span></div>
 <p id="status" role="status">正在載入你圖面的模型資料……</p>
 <iframe id="viewer" title="室內平面與 3D 編輯器" allow="fullscreen" allowfullscreen></iframe>
-<footer>地磚／廚衛位置依提供圖面示意；名稱、門窗型式、櫃體高度、結構用途仍待核對。不是施工圖。</footer>
-<dialog id="details"><h2>這一版依據什麼建立？</h2><p>牆體與開口：IMG_6047.png（變更後建築圖）。水電比對：IMG_6049.png（註記水電無變更）。完整原始圖與識別資訊未上傳到公開 repo。</p><div id="warnings"></div><p>校正基準為下方兩個紅色柱符號的中心距。單一實測長度只校正比例，不代表所有尺寸已驗收。切換比例或層高會使用另一個本機保存版本；修改家具後，請先在編輯器的「檔案」選單匯出 JSON。</p><button id="close">關閉</button></dialog>
+<footer>V2.3 衛浴：暖米／冷灰、浴櫃、浴缸與玻璃隔間試配。原格局不變，尺寸仍待核對。</footer>
+<dialog id="details"><h2>建模依據與版本</h2><p>牆體與開口：IMG_6047.png（變更後建築圖）。水電比對：IMG_6049.png（註記水電無變更）。完整原始圖與識別資訊未上傳到公開 repo。</p><p>V2.3 衛浴外觀參考樣品屋照片。A 暫用暖米、B 暫用冷灰、C 暫用暖米，皆可切換；隔間位置、高度、材質與五金均為提案，不代表實測配置。完全離線單檔位於 Actions 交付包的 home-3d-offline.html。</p><div id="warnings"></div><p>校正基準為下方兩個紅色柱符號的中心距。單一實測長度只校正比例，不代表所有尺寸已驗收。切換比例或層高會使用另一個本機保存版本；修改家具後，請先在編輯器的「檔案」選單匯出 JSON。</p><button id="close">關閉</button></dialog>
 <script type="module">
-import {compileHome,validateHome} from './js/compile-home.mjs';
+import {compileHome,validateHome} from './js/compile-scene.mjs';
 const $=s=>document.querySelector(s), frame=$('#viewer');let home,engine,compiled,timer;
 const status=(text,error=false)=>{$('#status').textContent=text;$('#status').classList.toggle('error',error)};
-const message=e=>{if(e.source!==frame.contentWindow)return;if(e.data?.type==='home-ready'){clearTimeout(timer);status('已載入你的比例草模：拖曳旋轉、滾輪縮放；T 切換 2D／3D。所有尺寸與高度仍待核對。')}else if(e.data?.type==='home-error'){clearTimeout(timer);status('3D 啟動失敗：'+e.data.message+'；仍可檢查 2D 圖面。',true)}};
+const message=e=>{if(e.source!==frame.contentWindow)return;if(e.data?.type==='home-ready'){clearTimeout(timer);status('V2.3 已載入。使用下方衛浴工具列查看近景、切換暖米／冷灰或取消隔間；T 切換 2D／3D。')}else if(e.data?.type==='home-error'){clearTimeout(timer);status('3D 啟動失敗：'+e.data.message+'；仍可檢查 2D 圖面。',true)}};
 window.addEventListener('message',message);
-function render(){compiled=compileHome(engine,home);frame.srcdoc=compiled;$('#download').disabled=false;clearTimeout(timer);status('圖面資料已載入，正在啟動 Three.js 3D……');timer=setTimeout(()=>status('3D 尚未就緒。首次使用需要載入 Three.js；請確認網路或改用 Actions 產出的含引擎版本。2D 圖面仍可檢查。',true),45000)}
+function render(){compiled=compileHome(engine,home);frame.srcdoc=compiled;$('#download').disabled=false;clearTimeout(timer);status('圖面資料已載入，正在啟動 Three.js 3D……');timer=setTimeout(()=>status('3D 尚未就緒。首次使用需要載入 Three.js；請確認網路或改用 Actions 產出的離線版本。',true),60000)}
 try{
- if(location.protocol==='file:')throw Error('請先用 python3 -m http.server 8000 啟動此資料夾，再開 http://localhost:8000；或使用已匯出的單檔網頁。');
+ if(location.protocol==='file:')throw Error('請用 python3 -m http.server 8000 啟動此資料夾，再開 http://localhost:8000；直接開檔請使用 home-3d-offline.html。');
  const read=async url=>{const r=await fetch(url,{cache:'no-cache'});if(!r.ok)throw Error(url+' HTTP '+r.status);return r};
  const [a,b]=await Promise.all([read('./data/home.json'),read('./engine.html')]);home=validateHome(await a.json());engine=await b.text();
  for(const w of home.warnings){const p=document.createElement('p');p.textContent=w;$('#warnings').appendChild(p)}render();
 }catch(e){status(String(e.message||e),true)}
 $('#notes').onclick=()=>$('#details').showModal();$('#close').onclick=()=>$('#details').close();
 $('#calibrate').onclick=()=>{if(!home||!engine)return;try{const next=structuredClone(home),distance=$('#distance').value.trim(),height=Number($('#height').value);if(distance){const d=Number(distance);if(!Number.isFinite(d)||d<2000||d>40000)throw Error('中心距請填 2000–40000 mm。');next.calibration.mmPerTraceUnit=d/next.calibration.anchorSpan;next.calibration.knownDistanceMm=d;next.calibration.status='one-distance-only'}if(!Number.isFinite(height)||height<2200||height>4200)throw Error('層高請填 2200–4200 mm。');next.heightMm=height;next.windowHeadMm=Math.min(2400,height-100);validateHome(next);if(!confirm('將重新載入新的校正版本。家具已修改時，請先取消並匯出 JSON；舊版本仍保存在目前瀏覽器。繼續？'))return;home=next;render()}catch(e){status(e.message,true)}};
-$('#download').onclick=()=>{if(!compiled)return;const url=URL.createObjectURL(new Blob([compiled],{type:'text/html;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download='home-proportional-3d.html';a.click();setTimeout(()=>URL.revokeObjectURL(url),30000)};
+$('#download').onclick=()=>{if(!compiled)return;const url=URL.createObjectURL(new Blob([compiled],{type:'text/html;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download='home-v23-network.html';a.click();setTimeout(()=>URL.revokeObjectURL(url),30000)};
 </script></body></html>

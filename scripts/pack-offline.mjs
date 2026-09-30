@@ -6,7 +6,7 @@ import {readFile,writeFile} from 'node:fs/promises';
 import {join,posix} from 'node:path';
 const root=process.argv[2] || 'dist';
 let html=await readFile(join(root,'index.html'),'utf8');
-const imports={},queue=['three','three/addons/controls/OrbitControls.js','three/addons/controls/PointerLockControls.js','three/addons/geometries/RoundedBoxGeometry.js','three/addons/environments/RoomEnvironment.js','three/addons/renderers/CSS2DRenderer.js'];
+const imports={},queue=['three','three/addons/objects/Reflector.js','three/addons/controls/OrbitControls.js','three/addons/controls/PointerLockControls.js','three/addons/geometries/RoundedBoxGeometry.js','three/addons/environments/RoomEnvironment.js','three/addons/renderers/CSS2DRenderer.js'];
 while(queue.length){
  const key=queue.shift();if(imports[key])continue;
  const rel=key==='three'?'build/three.module.js':'examples/jsm/'+key.slice('three/addons/'.length);

@@ -1,6 +1,6 @@
 import {readFile,writeFile,mkdir,cp,stat} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
-import {compileHome} from '../js/compile-home.mjs';
+import {compileHome} from '../js/compile-scene.mjs';
 const engine=await readFile('engine.html','utf8');
 const blob=createHash('sha1').update(`blob ${Buffer.byteLength(engine)}\0`).update(engine).digest('hex');
 if(blob!=='4cee1eae0684acfc660a27b18c218f1f7703193b')throw Error('Upstream engine changed: review adapter before building.');
@@ -17,5 +17,5 @@ if(process.argv.includes('--vendor')){
 }
 await writeFile('dist/index.html',html);
 await writeFile('dist/home.json',JSON.stringify(home,null,2));
-await writeFile('dist/README.txt','比例草模，非實測／非施工圖。執行 python3 -m http.server 8000 後開 http://localhost:8000 。\n版本內含 Three.js 時不需外部網路。\n');
+await writeFile('dist/README.txt','V2.3 衛浴試配，非實測／非施工圖。home-3d-offline.html 為離線單檔；index.html 需靜態伺服器。\n請閱讀 docs/bathrooms-v23.md。\n');
 console.log(JSON.stringify({engineBlob:blob,rooms:home.rooms.length,doors:home.doors.length,scale:'UNVERIFIED',output:'dist/index.html'}));
