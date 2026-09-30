@@ -19,6 +19,7 @@ jobs:
       - run: npm install --no-save --ignore-scripts three@0.160.0 playwright@1.51.1
       - run: npx playwright install --with-deps chromium
       - run: node scripts/build.mjs --vendor
+      - run: node scripts/pack-offline.mjs
       - name: Browser smoke test
         run: |
           python3 -m http.server 8000 --bind 127.0.0.1 >/tmp/home-http.log 2>&1 &
