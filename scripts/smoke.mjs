@@ -16,13 +16,24 @@ try{
  await page.evaluate(()=>setView('3d'));await page.waitForTimeout(2500);await page.screenshot({path:'artifacts/home-3d.png'});
  const png=await page.evaluate(()=>window.__homeScreenshot());assert.ok(png.length>50000,'3D screenshot unexpectedly empty');
  await page.locator('[data-mode="walk"]').click();await page.waitForTimeout(300);assert.ok(await page.evaluate(()=>window.View3D.walking()));await page.locator('[data-mode="orbit"]').click();
- const offline=await browser.newPage({viewport:{width:1600,height:1000}}),requests=[],offlineErrors=[];
- offline.on('request',r=>{if(/^https?:/.test(r.url()))requests.push(r.url())});offline.on('pageerror',e=>offlineErrors.push(e.message));
+ assert.deepEqual(errors,[]);
+ // Do not leave a second continuously rendering WebGL scene on the CI GPU.
+ await page.context().close();
+ const offline=await browser.newPage({viewport:{width:1600,height:1000}}),requests=[],offlineErrors=[],consoleErrors=[];
+ offline.on('request',r=>{if(/^https?:/.test(r.url()))requests.push(r.url())});
+ offline.on('pageerror',e=>{offlineErrors.push(e.message);console.log('OFFLINE PAGE ERROR:',e.message)});
+ offline.on('console',m=>{if(m.type()==='error'){consoleErrors.push(m.text().slice(0,1500));console.log('OFFLINE CONSOLE:',m.text().slice(0,1500))}});
  await offline.context().setOffline(true);
  await offline.goto(pathToFileURL(resolve('dist/home-3d-offline.html')).href,{waitUntil:'load'});
- await offline.waitForFunction(()=>window.__homeReady && window.__homeHealth?.().ready,null,{timeout:45000});
+ try{await offline.waitForFunction(()=>window.__homeReady && window.__homeHealth?.().ready,null,{timeout:45000})}
+ catch(e){
+   const diagnostic=await offline.evaluate(()=>({url:location.href,ready:window.__homeReady,engine:!!window.View3D,health:window.__homeHealth?.(),text:document.body.innerText.slice(0,800)}));
+   console.log('OFFLINE DIAGNOSTIC',JSON.stringify({diagnostic,requests,offlineErrors,consoleErrors}));
+   await writeFile('artifacts/offline-diagnostic.json',JSON.stringify({diagnostic,requests,offlineErrors,consoleErrors},null,2));
+   await offline.screenshot({path:'artifacts/offline-diagnostic.png'});throw e;
+ }
  await offline.waitForTimeout(1200);await offline.screenshot({path:'artifacts/home-3d-offline.png'});
- assert.deepEqual(requests,[]);assert.deepEqual(offlineErrors,[]);
+ assert.deepEqual(requests,[]);assert.deepEqual(offlineErrors,[]);assert.deepEqual(consoleErrors,[]);
  assert.equal(await offline.locator('[data-cut="1.2"].on').count(),1);
- assert.deepEqual(errors,[]);await writeFile('artifacts/verification.json',JSON.stringify({health,errors,checks:['compiled original engine','actual WebGL render','2D polygons','demolition locked','room editing','walk mode','offline single-file WebGL render with networking disabled'],offlineRequests:requests,timestamp:new Date().toISOString()},null,2));console.log('PASS: actual Three.js renderer and model controls');
+ await writeFile('artifacts/verification.json',JSON.stringify({health,errors,checks:['compiled original engine','actual WebGL render','2D polygons','demolition locked','room editing','walk mode','offline single-file WebGL render with networking disabled'],offlineRequests:requests,timestamp:new Date().toISOString()},null,2));console.log('PASS: actual Three.js renderer and model controls');
 }finally{await browser.close()}
