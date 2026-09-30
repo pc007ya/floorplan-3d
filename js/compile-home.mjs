@@ -48,7 +48,7 @@ export function compileHome(engine, input) {
   const array=(name,value)=>replace(new RegExp(`const ${name} = \\[[\\s\\S]*?\\n\\];`),`const ${name} = ${js(value)};`,name);
   array('WALLS',h.walls); array('WINS',h.windows); array('DOORS',h.doors); array('SLIDES',h.slides); array('ROOMS',h.rooms);
   replace(/function defaultFurniture\(\)\{ return \[[\s\S]*?\];\}/,`function defaultFurniture(){ return ${js(h.fixtures)}; }`,'fixtures');
-  const storage=`${h.id}:${h.calibration.mmPerTraceUnit}:${h.heightMm}`;
+  const storage=`${h.id}:${h.revision}:${h.calibration.mmPerTraceUnit}:${h.heightMm}`;
   replace(/const STORE = '[^']+';/,`const STORE = ${js(storage)};`,'storage');
   replace(/const BOUNDS = \{[^;]+\};/,`const BOUNDS = ${js({x:x0-900,y:y0-900,w:x1-x0+1800,h:y1-y0+1800})};`,'bounds');
   replace(/function renderDims\(\)\{[\s\S]*?\n\}/,`function renderDims(){ $('#gDims').innerHTML = ''; }`,'no invented dimension chains');
@@ -59,7 +59,7 @@ export function compileHome(engine, input) {
   replace(/\/\/ 入户标识[\s\S]*?(?=  \$\('#gOpen'\))/,`// Entrance is derived from the traced door, not the upstream sample.\n  s += '<text x="${910*h.calibration.mmPerTraceUnit}" y="${1100*h.calibration.mmPerTraceUnit}" text-anchor="middle" font-size="180" fill="#8c593a">入口（依圖）</text>';\n`,'entrance marker');
   replace(/function overviewPanel\(\)\{[\s\S]*?\n\}/,`function overviewPanel(){
     const rows=ROOMS.map(r=>'<tr class="click" data-room="'+r.id+'"><td>'+esc(state.rooms[r.id].name)+'</td><td class="r">≈ '+fmt(area(r.poly))+' m²</td></tr>').join('');
-    return '<section><h3>你的戶型｜比例草模</h3><p>房間 A／B／C 的用途尚待確認；衛浴依設備辨識。上側區域邊界與用途待核。</p><p><b>尺寸、面積及高度未經現場校正。</b>未提供施工估價或拆牆判定。</p></section><section><h3>模型區域（非實測面積）</h3><table>'+rows+'</table></section><section><h3>編輯與操作</h3><p>滑鼠拖曳旋轉，滾輪縮放；按 T 切換平面。可以從家具庫加入自己的布置，再匯出 JSON 保存。</p><p>廚衛及長櫃只依原圖位置示意；沒有自行加入床或沙發。</p><button class="btn" id="clearMeasure">清除測量</button><button class="btn" id="clearFurn">清空設備布置</button></section>';
+    return '<section><h3>你的戶型｜樣品屋公共區 V2</h3><p>客餐廚已加入樣品屋照片參考的中島、高櫃、吧椅、客餐廳家具、電視牆與燈槽天花。房間 A／B／C 仍未指定用途。</p><p><b>尺寸、面積、家具位置與高度仍未經實測校正。</b>照片只作外觀參考，不作施工或採購依據。</p></section><section><h3>模型區域（非實測面積）</h3><table>'+rows+'</table></section><section><h3>編輯與操作</h3><p>滑鼠拖曳旋轉，滾輪縮放；按 T 切換平面。V2 家具仍可選取、拖曳、旋轉與刪除。</p><p>公共區地坪仍沿用原圖地磚設定；未因樣品屋照片自動改成木地板。</p><button class="btn" id="clearMeasure">清除測量</button><button class="btn" id="clearFurn">清空設備布置</button></section>';
   }`,'overview');
   replace(/function roomPanel\(r\)\{[\s\S]*?\n\}/,`function roomPanel(r){
     const st=state.rooms[r.id];
@@ -87,11 +87,11 @@ export function compileHome(engine, input) {
   src=src.replaceAll('<small>${area(r.poly).toFixed(', '<small>≈ ${area(r.poly).toFixed(');
   const safetyStyle=`<style>[data-tool="demolish"],[data-layer="bearing"],[data-layer="dims"],#s60,#s100{display:none!important} .home-warning{padding:7px 12px;background:#fff2d5;border-bottom:1px solid #d9bd7d;font-size:12px} .brand b{font-size:14px}</style>`;
   src=src.replace('</head>',safetyStyle+'</head>');
-  src=src.replace('<header>','<header><div class="home-warning" style="flex-basis:100%">依原圖比例描繪・尺寸／高度／用途待確認・不作施工依據。日照與材質為示意。</div>');
+  src=src.replace('<header>','<header><div class="home-warning" style="flex-basis:100%">樣品屋公共區 V2・格局仍依原圖・家具／飾面／燈光為參考提案・尺寸未校正。</div>');
   const marker='window.View3D = {enter, exit, relang, sync:() => sync(), shot, groundAt, flyToRoom:id => active && !anim && flyToRoom(id), walking:() => active && opt.mode === \'walk\'};';
   if(!src.includes(marker)) throw Error('Engine adapter: missing 3D export');
   src=src.replace(marker,marker+`\nwindow.__homeModel = ${js({id:h.id,revision:h.revision,roomCount:h.rooms.length,wallCount:h.walls.length,doorCount:h.doors.length,scale:h.calibration.mmPerTraceUnit})};
-window.__homeHealth=()=>({ready:inited && active, meshes:scene?scene.children.length:0, width:renderer?.domElement.width, height:renderer?.domElement.height, rooms:ROOMS.map(r=>r.id), demolished:state.demolished.slice(), source:window.__homeModel});
+window.__homeHealth=()=>({ready:inited && active, meshes:scene?scene.children.length:0, width:renderer?.domElement.width, height:renderer?.domElement.height, rooms:ROOMS.map(r=>r.id), furniture:state.furniture.length, design:'showhouse-public-v2', demolished:state.demolished.slice(), source:window.__homeModel});
 window.__homeScreenshot=()=>renderer.domElement.toDataURL('image/png');
 setTimeout(async()=>{try{ await setView('3d'); window.__homeReady=true; parent.postMessage({type:'home-ready',modelId:${js(h.id)}},'*'); }catch(e){console.error(e);parent.postMessage({type:'home-error',message:String(e)},'*');}},150);
 `);

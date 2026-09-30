@@ -6,7 +6,7 @@ try{
  await page.goto('http://127.0.0.1:8000/dist/',{waitUntil:'networkidle'});
  await page.waitForFunction(()=>window.__homeReady && window.__homeHealth?.().ready,null,{timeout:45000});
  await page.waitForTimeout(1200);
- const health=await page.evaluate(()=>window.__homeHealth());assert.equal(health.source.id,'home-trace-v1');assert.equal(health.rooms.length,11);assert.ok(health.width>100&&health.height>100);assert.deepEqual(health.demolished,[]);
+ const health=await page.evaluate(()=>window.__homeHealth());assert.equal(health.source.id,'home-trace-v1');assert.equal(health.rooms.length,11);assert.equal(health.design,'showhouse-public-v2');assert.ok(health.furniture>=28);assert.ok(health.width>100&&health.height>100);assert.deepEqual(health.demolished,[]);
  await page.evaluate(()=>setView('2d'));await page.waitForTimeout(1500);
  assert.equal(await page.locator('#gRooms polygon').count(),11);
  await page.evaluate(()=>setTool('demolish'));assert.equal(await page.evaluate(()=>ui.tool),'select');
