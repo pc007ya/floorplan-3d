@@ -6,10 +6,13 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+concurrency:
+  group: floorplan-verify-publish-${{ github.ref }}
+  cancel-in-progress: false
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - name: Package exact source
@@ -30,6 +33,16 @@ jobs:
           python3 -m http.server 8000 --bind 127.0.0.1 >/tmp/home-http.log 2>&1 &
           node scripts/smoke.mjs
       - run: node scripts/smoke-bathrooms.mjs
+      - name: Prepare public site (tested model only)
+        run: node scripts/prepare-pages.mjs
+      - name: Verify GitHub Pages project path
+        run: node scripts/smoke-pages.mjs
+      - name: Upload verified Pages artifact
+        if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+          retention-days: 7
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -37,4 +50,48 @@ jobs:
           path: |
             dist/
             artifacts/
+            _site/
           retention-days: 14
+  deploy:
+    name: Publish verified 3D to GitHub Pages
+    if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      # First-time site enablement is an owner setting, not a GITHUB_TOKEN operation.
+      - name: Read GitHub Pages configuration
+        uses: actions/configure-pages@v5
+      - name: Deploy verified model
+        id: deployment
+        uses: actions/deploy-pages@v4
+      - name: Check published version
+        env:
+          SITE_URL: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          python3 - <<'PY'
+          import json, os, time, urllib.request
+          expected = os.environ['GITHUB_SHA']
+          url = os.environ['SITE_URL'].rstrip('/') + '/build-info.json?commit=' + expected
+          for attempt in range(12):
+              try:
+                  with urllib.request.urlopen(url, timeout=20) as response:
+                      info = json.load(response)
+                  if info.get('sourceCommit') == expected:
+                      print('Published source commit verified:', expected)
+                      break
+              except Exception as exc:
+                  print('Waiting for published version:', type(exc).__name__)
+              time.sleep(10)
+          else:
+              raise SystemExit('Pages deployment returned, but public source version could not be verified')
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as summary:
+              summary.write('Published model: ' + os.environ['SITE_URL'] + '\n\nSource: `' + expected + '`\n')
+          PY
