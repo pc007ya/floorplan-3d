@@ -35,9 +35,13 @@ const titleZh = `室內設計 3D｜V${metadata.bathroomVersion} 衛浴試配`;
 const titleEn = `Interior 3D | V${metadata.bathroomVersion} Bathroom Preview`;
 const runtimeTitle = "document.title = tr('户型装修设计', 'Floor Plan Designer');";
 assert.equal(html.split(runtimeTitle).length - 1, 1, 'Expected exactly one upstream language-title hook');
-assert.equal((html.match(/<title>[^<]*<\/title>/g) || []).length, 1, 'Expected exactly one title element');
 html = html.replace(runtimeTitle, `document.title = tr(${JSON.stringify(titleZh)}, ${JSON.stringify(titleEn)});`);
-html = html.replace(/<title>[^<]*<\/title>/, `<title>${titleZh}</title>`);
+// The editor also contains SVG <title> tooltips; only change the document head.
+const headEnd = html.indexOf('</head>');
+assert.ok(headEnd > 0, 'Document head missing');
+const head = html.slice(0, headEnd);
+assert.equal((head.match(/<title>[^<]*<\/title>/g) || []).length, 1, 'Expected one document title in head');
+html = head.replace(/<title>[^<]*<\/title>/, `<title>${titleZh}</title>`) + html.slice(headEnd);
 // Discourage indexing; this is not authentication and does not make the site private.
 html = html.replace('</head>', `<meta name="robots" content="noindex,nofollow,noarchive">\n<meta name="floorplan-source-commit" content="${sourceCommit}">\n</head>`);
 await rm('_site', {recursive:true, force:true});
