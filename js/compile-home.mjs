@@ -1,3 +1,4 @@
+import {applyLatestGeometry, validateBalconyDoors} from './latest-geometry.mjs';
 /** Adapter for the preserved upstream engine (blob 4cee1eae...).
  * Geometry lives in data/home.json; mismatched upstream source fails closed.
  */
@@ -19,6 +20,7 @@ export function validateHome(home) {
   if (new Set(home.fixtures.map(f => f.id)).size !== home.fixtures.length) throw Error('Duplicate fixture id');
   for (const f of home.fixtures) if (['cx','cy','w','d','rot'].some(k => !Number.isFinite(f[k])) || f.w <= 0 || f.d <= 0) throw Error('Invalid fixture');
   for (const d of home.doors) if (!Number.isFinite(d.len) || d.len <= 0 || [d.h,d.c,d.o].some(p => !Array.isArray(p) || p.length !== 2 || p.some(n => !Number.isFinite(n)))) throw Error('Invalid door');
+  validateBalconyDoors(home);
   return home;
 }
 export function scaledHome(input) {
@@ -29,6 +31,7 @@ export function scaledHome(input) {
   h.windows = h.windows.map(point);
   h.doors = h.doors.map(d => ({...d,rect:point(d.rect),h:point(d.h),len:n(d.len)}));
   h.slides = h.slides.map(d => ({...d,rect:point(d.rect)}));
+  h.balconyDoors = (h.balconyDoors || []).map(d => ({...d,rect:point(d.rect)}));
   h.fixtures = h.fixtures.map(f => ({...f,...Object.fromEntries(['cx','cy','w','d'].map(k=>[k,n(f[k])]))}));
   h.walk = {start:point(h.walk.start),target:point(h.walk.target)};
   const pts = h.rooms.flatMap(r=>r.poly).concat(h.walls.flatMap(w=>[[w[0],w[1]],[w[2],w[3]]]));
@@ -125,5 +128,5 @@ window.__homeHealth=()=>({ready:inited && active, meshes:scene?scene.children.le
 window.__homeScreenshot=()=>renderer.domElement.toDataURL('image/png');
 setTimeout(async()=>{try{ await setView('3d'); window.__homeReady=true; parent.postMessage({type:'home-ready',modelId:${js(h.id)}},'*'); }catch(e){console.error(e);parent.postMessage({type:'home-error',message:String(e)},'*');}},150);
 `);
-  return src;
+  return applyLatestGeometry(src,h);
 }

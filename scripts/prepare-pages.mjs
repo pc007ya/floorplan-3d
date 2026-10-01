@@ -22,6 +22,7 @@ const metadata = {
   modelId: home.id,
   modelRevision: home.revision,
   bathroomVersion: bathroomConfig(home).version,
+  geometryCounts: {rooms:home.rooms.length,walls:home.walls.length,windows:home.windows.length,doors:home.doors.length,balconyDoors:(home.balconyDoors||[]).length,fixtures:home.fixtures.length},
   sourceCommit,
   builtAt: new Date().toISOString(),
   publication: 'public-concept-model',
@@ -31,8 +32,8 @@ const metadata = {
 };
 // applyStaticLang() overwrites <title> at startup and every language switch.
 // Update that exact hook as well as the static title; do not weaken the browser test.
-const titleZh = `室內設計 3D｜V${metadata.bathroomVersion} 衛浴試配`;
-const titleEn = `Interior 3D | V${metadata.bathroomVersion} Bathroom Preview`;
+const titleZh = `室內設計 3D｜最新圖面 r02・V${metadata.bathroomVersion} 衛浴試配`;
+const titleEn = `Interior 3D | Latest plan r02 | V${metadata.bathroomVersion} Bathroom Preview`;
 const runtimeTitle = "document.title = tr('户型装修设计', 'Floor Plan Designer');";
 assert.equal(html.split(runtimeTitle).length - 1, 1, 'Expected exactly one upstream language-title hook');
 html = html.replace(runtimeTitle, `document.title = tr(${JSON.stringify(titleZh)}, ${JSON.stringify(titleEn)});`);

@@ -1,34 +1,53 @@
 /** Photo-inspired bathroom overlay. Base geometry and fixture anchors are immutable.
  * The serialized installer executes inside the pinned upstream 3D module scope.
  */
+// Sanitized divider positions from the latest architectural-plan bathroom config.
+// Store horizontal coordinates in trace units, so user calibration scales them with the plan.
+// The canceled guest bathroom is deliberately absent: no finishes, mirror or shower overlay.
+const LATEST_BATHROOMS = [
+  {id:'wet-a',label:'A',variant:'warm',front:457.2,farEnd:'min',fixtureIds:['tub','wc-a','basin-a']},
+  {id:'wet-b',label:'B',variant:'gray',front:627.6,farEnd:'max',enclosureX1:800.88,fixtureIds:['wc-b','basin-b']}
+];
 export function bathroomConfig(home) {
   const s=home.calibration.mmPerTraceUnit, H=home.heightMm/1000;
-  const definitions=[['wet-a','A','warm',.36],['wet-b','B','gray',.70],['wet-c','C','warm',.71]];
-  const rooms=definitions.map(([id,label,variant,fraction])=>{
-    const r=home.rooms.find(r=>r.id===id);
-    if(!r||r.poly.length!==4) throw Error('Bathroom overlay requires known rectangular room: '+id);
-    const xs=r.poly.map(p=>p[0]*s),ys=r.poly.map(p=>p[1]*s);
+  if(!Number.isFinite(s)||s<=0)throw Error('Bathroom overlay requires a valid plan scale');
+  const rooms=LATEST_BATHROOMS.map(def=>{
+    const r=home.rooms.find(r=>r.id===def.id);
+    if(!r||!Array.isArray(r.poly)||r.poly.length<4)throw Error('Bathroom overlay requires a known polygon: '+def.id);
+    const floorPolygon=r.poly.map(p=>p.map(v=>v*s));
+    const xs=floorPolygon.map(p=>p[0]),ys=floorPolygon.map(p=>p[1]);
     const bounds=[Math.min(...xs),Math.min(...ys),Math.max(...xs),Math.max(...ys)];
-    const [x0,z0,x1,z1]=bounds, surfaces=[];
-    const edges=[{axis:0,fixed:x0,lo:z0,hi:z1,sign:1},{axis:0,fixed:x1,lo:z0,hi:z1,sign:-1},{axis:1,fixed:z0,lo:x0,hi:x1,sign:1},{axis:1,fixed:z1,lo:x0,hi:x1,sign:-1}];
+    const [x0,z0,x1,z1]=bounds,surfaces=[];
+    const signedArea=floorPolygon.reduce((sum,p,i)=>{const q=floorPolygon[(i+1)%floorPolygon.length];return sum+p[0]*q[1]-q[0]*p[1]},0);
+    if(Math.abs(signedArea)<1e-6)throw Error('Bathroom overlay requires a nondegenerate polygon: '+def.id);
+    const orientation=Math.sign(signedArea),epsilon=s*1e-6;
+    // Use every actual polygon edge, including B's inset return; never cladding its bounding box.
+    const edges=floorPolygon.map((p,i)=>{
+      const q=floorPolygon[(i+1)%floorPolygon.length],dx=q[0]-p[0],dz=q[1]-p[1];
+      if(Math.abs(dx)<epsilon&&Math.abs(dz)>epsilon)return {axis:0,fixed:p[0],lo:Math.min(p[1],q[1]),hi:Math.max(p[1],q[1]),sign:-Math.sign(dz)*orientation};
+      if(Math.abs(dz)<epsilon&&Math.abs(dx)>epsilon)return {axis:1,fixed:p[1],lo:Math.min(p[0],q[0]),hi:Math.max(p[0],q[0]),sign:Math.sign(dx)*orientation};
+      throw Error('Bathroom overlay requires axis-aligned polygon edges: '+def.id);
+    });
     const add=(rect,bottom,head,source)=>edges.forEach(e=>{
       const a=e.axis,b=1-a,R=rect.slice(0,4).map(v=>v*s);
-      if(e.fixed<R[a]-65 || e.fixed>R[a+2]+65)return;
+      if(e.fixed<R[a]-epsilon||e.fixed>R[a+2]+epsilon)return;
       const lo=Math.max(e.lo,R[b]),hi=Math.min(e.hi,R[b+2]);
-      if(hi>lo+5 && head>bottom)surfaces.push({...e,lo,hi,bottom,head,source});
+      if(hi>lo+epsilon&&head>bottom)surfaces.push({...e,lo,hi,bottom,head,source});
     });
     home.walls.forEach((w,i)=>add(w,0,w[4]==='low'?Math.min(1,H):H,'wall-'+i));
-    home.doors.forEach((d,i)=>add(d.rect,home.doorHeadMm/1000,H,'door-head-'+i));
+    home.doors.forEach((d,i)=>add(d.rect,(d.heightMm??home.doorHeadMm)/1000,H,'door-head-'+i));
     home.windows.forEach((w,i)=>{add(w,0,home.windowSillMm/1000,'window-sill-'+i);add(w,home.windowHeadMm/1000,H,'window-head-'+i)});
-    // A: tub enclosure at the far end. B/C: shallow shower proposals at rear.
-    const front=id==='wet-a'?z0+(z1-z0)*fraction:z0+(z1-z0)*fraction;
-    return {id,label,variant,bounds,surfaces,front,far:id==='wet-a'?z0:z1,
-      fixtureIds:id==='wet-a'?['tub','wc-a','basin-a']:id==='wet-b'?['wc-b','basin-b']:['wc-c','basin-c']};
+    const front=def.front*s,far=def.farEnd==='min'?z0:z1;
+    const enclosureBounds=[x0,z0,def.enclosureX1===undefined?x1:def.enclosureX1*s,z1];
+    if(front<=z0||front>=z1||enclosureBounds[2]<=x0||enclosureBounds[2]>x1+epsilon)throw Error('Bathroom divider is incompatible with plan: '+def.id);
+    return {id:def.id,label:def.label,variant:def.variant,bounds,floorPolygon,surfaces,front,far,enclosureBounds,
+      fixtureIds:[...def.fixtureIds],enclosureProposed:true,
+      enclosureNote:'Divider position follows the latest plan. Sliding leaves and height remain a reversible proposal.'};
   });
-  return {version:'2.3',rooms,H,sourceScale:s,referenceOnly:true,
-    sources:['2026-08-25.jpg','2026-08-25(2).jpg','2026-08-25(4).jpg','2026-08-25(16).jpg'],
-    assumptions:{mirrorHeightM:.86,cabinetBottomM:.24,basinTopM:.84,glassHeightM:2.05,tubHeightM:.59,measurementsVerified:false},
-    notice:'暖米／冷灰配色、隔間分界與高度均為試配，非實測或施工圖。'};
+  return {version:'2.3',sourceVersion:'latest-pdf-1',rooms,H,sourceScale:s,coordinateSpace:'millimetres',referenceOnly:true,
+    sources:['Latest user-supplied architectural plan and prior authorized style references'],
+    assumptions:{mirrorHeightM:.86,cabinetBottomM:.24,basinTopM:.84,glassHeightM:2.05,tubHeightM:.59,measurementsVerified:false,planVectorScaleVerified:home.calibration.status==='pdf-dimension-validated'},
+    notice:'依最新圖面修正平面與門洞；浴室高度、鏡櫃及拉門造型仍為試配；客浴退訂設備不顯示。'};
 }
 export function applyBathrooms(html,home) {
   const config=bathroomConfig(home);
@@ -113,7 +132,7 @@ function installBathrooms(C) {
   }
   function finishFixture(g,f,kind){g.position.set(wx(f.cx),0,wz(f.cy));g.rotation.y=-f.rot*Math.PI/180;g.userData={fid:f.id,bathroomV23:true,kind};return g}
   function shower(r,top){
-    const [x0,z0,x1,z1]=r.bounds,X0=wx(x0)+.02,X1=wx(x1)-.02,front=wz(r.front),L=X1-X0,h=Math.min(2.05,top),chrome=material('chrome');
+    const [x0,z0,x1,z1]=r.enclosureBounds,X0=wx(x0)+.02,X1=wx(x1)-.02,front=wz(r.front),L=X1-X0,h=Math.min(2.05,top),chrome=material('chrome');
     if(h<.04)return;
     const g=named(new THREE.Group(),'shower-'+r.label),fixed=L*.53,door=L*.53,open=prefs().opened[r.id];
     g.userData={bathroomV23:true,proposal:true,room:r.id};
@@ -162,7 +181,15 @@ function installBathrooms(C) {
   sync=function(force){const s=JSON.stringify(prefs());baseSync(force||s!==signature);signature=s;syncMirrors();paintUI()};
   const baseBlocked=blocked;
   blocked=function(x,z,r=.22){if(baseBlocked(x,z,r))return true;return glassBounds.some(([x0,z0,x1,z1])=>x>x0-r&&x<x1+r&&z>z0-r&&z<z1+r)};
-  function syncMirrors(){if(!inited)return;mirrors.forEach(m=>{const r=room(m.userData.bathRoom),[a,b,c,d]=r.bounds;const inside=camera.position.x>wx(a)&&camera.position.x<wx(c)&&camera.position.z>wz(b)&&camera.position.z<wz(d);m.visible=prefs().enabled&&opt.cut>=1.96&&inside})}
+  function insideRoom(r,x,z){
+    let inside=false;
+    for(let i=0,j=r.floorPolygon.length-1;i<r.floorPolygon.length;j=i++){
+      const a=r.floorPolygon[i],b=r.floorPolygon[j],ax=wx(a[0]),az=wz(a[1]),bx=wx(b[0]),bz=wz(b[1]);
+      if((az>z)!==(bz>z)&&x<(bx-ax)*(z-az)/(bz-az)+ax)inside=!inside;
+    }
+    return inside;
+  }
+  function syncMirrors(){if(!inited)return;mirrors.forEach(m=>{const r=room(m.userData.bathRoom);m.visible=prefs().enabled&&opt.cut>=1.96&&insideRoom(r,camera.position.x,camera.position.z)})}
   const baseLoop=loop;loop=function(){syncMirrors();baseLoop()};
   const baseRenderRooms=renderRooms;
   renderRooms=function(){baseRenderRooms();drawPlan()};
@@ -170,7 +197,7 @@ function installBathrooms(C) {
     let guide=svg.querySelector('#gBathroomV23');if(!guide){guide=document.createElementNS('http://www.w3.org/2000/svg','g');guide.id='gBathroomV23';guide.style.pointerEvents='none';svg.querySelector('#gRooms').after(guide)}guide.innerHTML='';
     if(!prefs().enabled)return;
     C.rooms.forEach(r=>{const p=svg.querySelector('#gRooms [data-room="'+r.id+'"]');if(p)p.setAttribute('fill',prefs().variants[r.id]==='warm'?'#7b7b75':'#a1a6a5');
-      if(prefs().enclosures){const [a,,c]=r.bounds,mid=(a+c)/2;guide.innerHTML+='<path d="M'+a+' '+r.front+'H'+c+'" fill="none" stroke="#468187" stroke-width="2" stroke-dasharray="5 3" vector-effect="non-scaling-stroke"/><text x="'+mid+'" y="'+(r.front-70)+'" font-size="90" text-anchor="middle" fill="#376f75">玻璃隔間提案</text>';}
+      if(prefs().enclosures){const [a,,c]=r.enclosureBounds,mid=(a+c)/2;guide.innerHTML+='<path d="M'+a+' '+r.front+'H'+c+'" fill="none" stroke="#468187" stroke-width="2" stroke-dasharray="5 3" vector-effect="non-scaling-stroke"/><text x="'+mid+'" y="'+(r.front-70)+'" font-size="90" text-anchor="middle" fill="#376f75">玻璃隔間提案</text>';}
     });
   }
   const bar=document.createElement('div');bar.id='bath-v23-tools';bar.className='grp';bar.style.cssText='flex-basis:100%;flex-wrap:wrap;background:#edf4f1;padding:5px 8px;gap:5px';

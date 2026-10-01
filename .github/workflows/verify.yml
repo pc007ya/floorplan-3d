@@ -23,8 +23,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: node --test tests/*.test.mjs
       - run: npm install --no-save --ignore-scripts three@0.160.0 playwright@1.51.1
+      - run: node --test tests/*.test.mjs
       - run: npx playwright install --with-deps chromium
       - run: node scripts/build.mjs --vendor
       - run: node scripts/pack-offline.mjs
@@ -33,6 +33,7 @@ jobs:
           python3 -m http.server 8000 --bind 127.0.0.1 >/tmp/home-http.log 2>&1 &
           node scripts/smoke.mjs
       - run: node scripts/smoke-bathrooms.mjs
+      - run: node scripts/smoke-latest-geometry.mjs
       - name: Prepare public site (tested model only)
         run: node scripts/prepare-pages.mjs
       - name: Verify GitHub Pages project path

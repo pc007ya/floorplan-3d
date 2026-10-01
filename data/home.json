@@ -1,288 +1,322 @@
 {
   "schemaVersion": 1,
-  "id": "home-trace-v1",
-  "revision": "2026-10-01-showhouse-public-v2",
-  "title": "室內設計 3D｜樣品屋公共區 V2 草模",
+  "id": "latest-pdf-vector-trace",
+  "revision": "2026-10-01-blender-r02-sofa-balcony-access",
+  "title": "最新客變平面圖｜Blender 對照模型",
   "source": {
-    "geometry": "IMG_6047.png",
-    "services": "IMG_6049.png",
-    "comparison": [
-      "IMG_6046.png",
-      "IMG_6048.png"
-    ],
+    "roomNamesVerified": true,
+    "geometry": "Latest user-supplied architectural PDF, page 1",
+    "services": "Same PDF, page 2",
+    "originalImagesPublished": false,
+    "coordinateSystem": "Rotated PDF page points, x right / y down",
     "imageSize": [
-      1594,
-      1098
+      1190.52001953125,
+      841.9200439453125
     ],
-    "traceTransform": {
-      "cropOrigin": [
-        730,
-        365
-      ],
-      "traceScale": 2
-    },
-    "floorNote": "全室 SPC 改地磚",
-    "servicesNote": "水電無變更",
-    "originalImagesPublished": false
+    "floorNote": "全室 SPC 改 80×80 地磚；客浴 60×60 改 80×80，壁磚及防水保留",
+    "servicesNote": "依最新水電客變圖；廚房、陽台、客廳與客浴有新增或移位",
+    "sourcePrivacy": "No original drawing, project, unit, address, or personal identifiers included in public geometry."
   },
   "calibration": {
-    "status": "unverified",
-    "mmPerTraceUnit": 12.5,
-    "anchorName": "下方兩根紅色柱符號的中心距",
+    "status": "pdf-dimension-validated",
+    "mmPerTraceUnit": 35.27777777777777,
+    "anchorName": "客浴門洞垂直尺寸 75 cm",
     "anchorA": [
-      122,
-      1016
+      847.32,
+      605.4
     ],
     "anchorB": [
-      1000,
-      1016
+      847.32,
+      626.64
     ],
-    "anchorSpan": 878,
-    "knownDistanceMm": null
+    "anchorSpan": 21.24,
+    "knownDistanceMm": 750,
+    "secondaryCheck": {
+      "spanPoints": 23.4,
+      "labelMm": 825,
+      "nominalMm": 825.5
+    },
+    "nominalScale": "1:100",
+    "axesCheck": {
+      "y": "Two explicit dimension spans verified",
+      "x": "Uses isotropic printed 1:100 scale; no horizontal numeric dimension found"
+    },
+    "paperSize": "A3",
+    "scaleScope": "2D printed structural geometry, not site-measured finished dimensions",
+    "nominalAnchorMm": 749.2999999999998,
+    "nominalAnchorRelativeError": -0.0009333333333335636
   },
   "heightMm": 2800,
   "doorHeadMm": 2100,
   "windowSillMm": 900,
   "windowHeadMm": 2400,
   "warnings": [
-    "本模型是依圖形比例人工描繪的概念草模，不是施工圖。",
-    "圖上 S:1/100 不足以校正經縮放截圖；預設每描圖單位 12.5 mm 僅供初步瀏覽。",
-    "房間用途、牆體結構分類、門窗型式與高度均未確認；不提供拆牆判定。",
-    "上側不規則區僅描繪可見範圍，可能含外部／不可使用空間，不計入室內面積。",
-    "未取得座向、日期及地點等日照分析必要條件；日夜模式僅為視覺效果。",
-    "公共區家具與飾面為樣品屋照片參考的配置提案；不代表實際採購品、材質或施工尺寸。",
-    "房間 A／B／C 仍未確認用途，本輪不加入臥室家具。"
+    "依最新 PDF 的 CAD 向量描繪；1:100 比例以 75 cm 與 82.5 cm 圖示驗證，誤差約 0.1%，不是現場實測。",
+    "圖面註明標示為結構尺寸，裝修淨尺寸可能不同。",
+    "牆高 2.8 m、門窗高度及窗型仍為建模假設；只有客浴預留洞口 75×210 cm 明確註記。",
+    "主臥、兩間臥室、廚房、客廳及三處陽台依圖面標籤；未加入使用者尚未指定的臥室家具。",
+    "上方交叉線未標示區不視為可使用陽台、不生成可使用地坪。",
+    "客浴門框門扇、面盆浴櫃、龍頭、鏡、淋浴拉門、淋浴龍頭與馬桶依客變取消；水電預留依圖面。",
+    "家具及浴室造型／玻璃隔間高度為可關閉的設計提案，非交屋配置或施工規格。",
+    "無座向、現場高度、窗型及結構工程資料；不作日照或拆牆判定。",
+    "依使用者指示，主臥與下方臥室兩處陽台開口改為落地可通行门；沿用原開口寬度及暫定2.4m頂高，雙扇滑門樣式與門高並非實測確認。"
   ],
   "rooms": [
     {
       "id": "a",
-      "name": "房間 A*",
+      "name": "主臥室",
       "poly": [
         [
-          227,
-          267
+          628.68,
+          383.64
         ],
         [
-          514,
-          267
+          734.88,
+          383.64
         ],
         [
-          514,
-          697
+          734.88,
+          533.88
         ],
         [
-          449,
-          697
+          709.44,
+          533.88
         ],
         [
-          449,
-          610
+          709.44,
+          505.44
         ],
         [
-          227,
-          610
+          628.68,
+          505.44
         ]
       ],
       "at": [
-        355,
-        437
+        680,
+        448
       ],
       "mat": "tile800"
     },
     {
       "id": "wet-a",
-      "name": "衛浴 A",
+      "name": "主浴",
       "poly": [
         [
-          83,
-          337
+          576.24,
+          409.08
         ],
         [
-          215,
-          337
+          625.8,
+          409.08
         ],
         [
-          215,
-          600
+          625.8,
+          505.44
         ],
         [
-          83,
-          600
+          576.24,
+          505.44
         ]
       ],
       "at": [
-        145,
-        450
+        600,
+        448
       ],
       "mat": "antislip"
     },
     {
       "id": "b",
-      "name": "房間 B*",
+      "name": "臥室（圖中）",
       "poly": [
         [
-          188,
-          610
+          615.84,
+          508.32
         ],
         [
-          437,
-          610
+          706.56,
+          508.32
         ],
         [
-          437,
-          801
+          706.56,
+          579.24
         ],
         [
-          188,
-          801
+          615.84,
+          579.24
         ]
       ],
       "at": [
-        305,
-        714
+        660,
+        548
       ],
       "mat": "tile800"
     },
     {
       "id": "c",
-      "name": "房間 C*",
+      "name": "臥室（圖下）",
       "poly": [
         [
-          263,
-          814
+          642.12,
+          582.0
         ],
         [
-          583,
-          814
+          760.44,
+          582.0
         ],
         [
-          583,
-          1001
+          760.44,
+          652.92
         ],
         [
-          263,
-          1001
+          642.12,
+          652.92
         ]
       ],
       "at": [
-        399,
-        914
+        696,
+        618
       ],
       "mat": "tile800"
     },
     {
       "id": "utility",
-      "name": "左下區域*",
+      "name": "工作陽台",
       "poly": [
         [
-          111,
-          815
+          587.52,
+          583.44
         ],
         [
-          249,
-          815
+          637.8,
+          583.44
         ],
         [
-          249,
-          961
+          637.8,
+          637.32
         ],
         [
-          111,
-          961
+          587.52,
+          637.32
         ]
       ],
       "at": [
-        179,
-        889
+        612,
+        610
       ],
-      "mat": "antislip"
+      "mat": "antislip",
+      "counted": false,
+      "exterior": true
     },
     {
       "id": "wet-b",
-      "name": "衛浴 B",
+      "name": "次浴",
       "poly": [
         [
-          595,
-          814
+          763.32,
+          582.0
         ],
         [
-          697,
-          814
+          805.8,
+          582.0
         ],
         [
-          697,
-          1001
+          805.8,
+          604.68
         ],
         [
-          595,
-          1001
+          800.88,
+          604.68
+        ],
+        [
+          800.88,
+          652.92
+        ],
+        [
+          763.32,
+          652.92
         ]
       ],
       "at": [
-        642,
-        958
+        782,
+        641
       ],
       "mat": "antislip"
     },
     {
       "id": "wet-c",
-      "name": "衛浴 C",
+      "name": "客浴（設備退訂）",
       "poly": [
         [
-          725,
-          814
+          808.56,
+          582.0
         ],
         [
-          831,
-          814
+          851.16,
+          582.0
         ],
         [
-          831,
-          1001
+          851.16,
+          652.92
         ],
         [
-          725,
-          1001
+          813.6,
+          652.92
+        ],
+        [
+          813.6,
+          604.68
+        ],
+        [
+          808.56,
+          604.68
         ]
       ],
       "at": [
-        779,
-        957
+        833,
+        641
       ],
-      "mat": "antislip"
+      "mat": "tile800"
     },
     {
       "id": "open",
-      "name": "開放區／廚具",
+      "name": "廚房／客廳",
       "poly": [
         [
-          526,
-          335
+          737.76,
+          409.08
         ],
         [
-          985,
-          335
+          906.36,
+          409.08
         ],
         [
-          985,
-          801
+          906.36,
+          579.24
         ],
         [
-          449,
-          801
+          709.44,
+          579.24
         ],
         [
-          449,
-          697
+          709.44,
+          533.88
         ],
         [
-          526,
-          697
+          734.88,
+          533.88
+        ],
+        [
+          734.88,
+          540.96
+        ],
+        [
+          737.76,
+          540.96
         ]
       ],
       "at": [
-        818,
-        572
+        861,
+        497
       ],
       "mat": "tile800"
     },
@@ -291,72 +325,124 @@
       "name": "入口走道",
       "poly": [
         [
-          844,
-          814
+          853.92,
+          579.24
         ],
         [
-          985,
-          814
+          906.36,
+          579.24
         ],
         [
-          985,
-          1042
+          906.36,
+          614.64
         ],
         [
-          866,
-          1042
+          902.16,
+          614.64
         ],
         [
-          866,
-          1009
+          902.16,
+          642.96
         ],
         [
-          844,
-          1009
+          896.52,
+          642.96
+        ],
+        [
+          896.52,
+          667.08
+        ],
+        [
+          853.92,
+          667.08
         ]
       ],
       "at": [
-        920,
-        913
+        875,
+        623
       ],
       "mat": "tile800"
     },
     {
       "id": "outside-a",
-      "name": "上側區域 A*",
+      "name": "宜居陽台",
       "poly": [
         [
-          177,
-          251
+          611.64,
+          379.32
         ],
         [
-          514,
-          251
+          734.88,
+          379.32
         ],
         [
-          514,
-          93
+          734.88,
+          320.88
         ],
         [
-          410,
-          70
+          683.64,
+          310.8
         ],
         [
-          315,
-          58
+          678.36,
+          309.96
         ],
         [
-          250,
-          62
+          673.2,
+          309.24
         ],
         [
-          177,
-          93
+          667.92,
+          308.76
+        ],
+        [
+          662.76,
+          308.52
+        ],
+        [
+          657.48,
+          308.52
+        ],
+        [
+          652.2,
+          308.76
+        ],
+        [
+          647.04,
+          309.12
+        ],
+        [
+          641.76,
+          309.84
+        ],
+        [
+          636.6,
+          310.68
+        ],
+        [
+          631.56,
+          311.76
+        ],
+        [
+          626.4,
+          313.08
+        ],
+        [
+          621.36,
+          314.64
+        ],
+        [
+          616.44,
+          316.32
+        ],
+        [
+          611.64,
+          318.36
         ]
       ],
       "at": [
-        347,
-        177
+        672,
+        350
       ],
       "mat": "tile600",
       "counted": false,
@@ -364,28 +450,36 @@
     },
     {
       "id": "outside-b",
-      "name": "上側區域 B*",
+      "name": "陽台（圖右上）",
       "poly": [
         [
-          528,
-          98
+          820.68,
+          374.4
         ],
         [
-          951,
-          176
+          896.52,
+          374.4
         ],
         [
-          951,
-          319
+          896.52,
+          397.8
         ],
         [
-          528,
-          319
+          883.08,
+          397.8
+        ],
+        [
+          883.08,
+          404.88
+        ],
+        [
+          820.68,
+          404.88
         ]
       ],
       "at": [
-        771,
-        253
+        859,
+        387
       ],
       "mat": "tile600",
       "counted": false,
@@ -394,287 +488,345 @@
   ],
   "walls": [
     [
-      92,
-      257,
-      168,
-      334,
+      580.44,
+      380.76,
+      608.76,
+      409.08,
       "b"
     ],
     [
-      964,
-      257,
-      1046,
-      335,
+      899.28,
+      380.76,
+      927.72,
+      409.08,
       "b"
     ],
     [
-      78,
-      978,
-      168,
-      1055,
+      574.8,
+      642.96,
+      608.76,
+      671.28,
       "b"
     ],
     [
-      957,
-      978,
-      1046,
-      1055,
+      896.52,
+      642.96,
+      927.72,
+      671.28,
       "b"
     ],
     [
-      176,
-      251,
-      274,
-      266,
+      611.64,
+      379.32,
+      647.04,
+      383.64,
       "e"
     ],
     [
-      461,
-      251,
-      525,
-      266,
+      715.08,
+      379.32,
+      739.2,
+      383.64,
       "e"
     ],
     [
-      514,
-      251,
-      528,
-      334,
+      734.88,
+      383.64,
+      739.2,
+      409.08,
       "e"
     ],
     [
-      520,
-      319,
-      577,
-      335,
+      734.88,
+      404.88,
+      756.84,
+      409.08,
       "e"
     ],
     [
-      921,
-      319,
-      964,
-      335,
+      883.08,
+      404.88,
+      899.28,
+      409.08,
       "e"
     ],
     [
-      69,
-      333,
-      83,
-      357,
+      571.92,
+      409.08,
+      576.24,
+      417.6,
       "e"
     ],
     [
-      69,
-      420,
-      83,
-      613,
+      571.92,
+      440.28,
+      576.24,
+      509.76,
       "e"
     ],
     [
-      69,
-      600,
-      188,
-      613,
+      576.24,
+      505.44,
+      615.84,
+      509.76,
       "e"
     ],
     [
-      177,
-      608,
-      188,
-      643,
+      611.64,
+      509.76,
+      615.84,
+      521.76,
       "e"
     ],
     [
-      177,
-      767,
-      188,
-      809,
+      611.64,
+      567.12,
+      615.84,
+      579.24,
       "e"
     ],
     [
-      100,
-      801,
-      262,
-      815,
+      583.32,
+      579.24,
+      642.12,
+      583.44,
       "e"
     ],
     [
-      249,
-      935,
-      263,
-      1007,
+      637.8,
+      628.8,
+      642.12,
+      652.92,
       "e"
     ],
     [
-      168,
-      1001,
-      838,
-      1015,
+      608.76,
+      652.92,
+      853.92,
+      657.12,
       "e"
     ],
     [
-      831,
-      1007,
-      845,
-      1055,
+      849.72,
+      657.12,
+      853.92,
+      671.28,
       "e"
     ],
     [
-      845,
-      1042,
-      866,
-      1055,
+      853.92,
+      667.08,
+      861.0,
+      671.28,
       "e"
     ],
     [
-      985,
-      334,
-      1027,
-      979,
+      906.36,
+      409.08,
+      920.52,
+      614.64,
       "e"
     ],
     [
-      215,
-      334,
-      227,
-      488,
+      902.16,
+      614.64,
+      920.52,
+      642.96,
+      "e"
+    ],
+    [
+      625.8,
+      409.08,
+      628.68,
+      464.4,
       "n"
     ],
     [
-      215,
-      546,
-      227,
-      610,
+      625.8,
+      485.64,
+      628.68,
+      505.44,
       "n"
     ],
     [
-      221,
-      598,
-      449,
-      610,
+      628.68,
+      505.44,
+      709.44,
+      508.32,
       "n"
     ],
     [
-      437,
-      603,
-      449,
-      688,
+      706.56,
+      508.32,
+      709.44,
+      536.64,
       "n"
     ],
     [
-      514,
-      334,
-      526,
-      610,
+      706.56,
+      562.2,
+      709.44,
+      579.24,
       "n"
     ],
     [
-      437,
-      754,
-      449,
-      807,
+      734.88,
+      409.08,
+      737.76,
+      540.96,
       "n"
     ],
     [
-      262,
-      801,
-      509,
-      814,
+      642.12,
+      579.24,
+      732.12,
+      582.0,
       "n"
     ],
     [
-      576,
-      801,
-      843,
-      814,
+      757.56,
+      579.24,
+      763.32,
+      582.0,
       "n"
     ],
     [
-      583,
-      870,
-      595,
-      1007,
+      784.56,
+      579.24,
+      853.92,
+      582.0,
       "n"
     ],
     [
-      831,
-      868,
-      844,
-      1007,
+      760.44,
+      582.0,
+      763.32,
+      652.92,
       "n"
     ],
     [
-      697,
-      814,
-      725,
-      1007,
+      805.8,
+      582.0,
+      808.56,
+      604.68,
       "n"
     ],
     [
-      109,
-      961,
-      251,
-      973,
+      800.88,
+      604.68,
+      813.6,
+      652.92,
+      "n"
+    ],
+    [
+      851.16,
+      582.0,
+      853.92,
+      605.4,
+      "n"
+    ],
+    [
+      851.16,
+      626.64,
+      853.92,
+      652.92,
+      "n"
+    ],
+    [
+      583.32,
+      583.44,
+      587.52,
+      631.68,
       "low"
     ],
     [
-      169,
-      995,
-      250,
-      1008,
+      587.52,
+      637.32,
+      637.8,
+      640.08,
+      "low"
+    ],
+    [
+      608.76,
+      647.16,
+      637.8,
+      652.92,
       "e"
+    ],
+    [
+      816.36,
+      370.08,
+      820.68,
+      404.88,
+      "low"
+    ],
+    [
+      820.68,
+      370.08,
+      896.52,
+      374.4,
+      "low"
+    ],
+    [
+      896.52,
+      362.28,
+      900.72,
+      397.8,
+      "e"
+    ],
+    [
+      607.32,
+      318.24,
+      611.64,
+      362.28,
+      "low"
+    ],
+    [
+      734.88,
+      320.88,
+      739.2,
+      379.32,
+      "low"
     ]
   ],
   "windows": [
     [
-      274,
-      252,
-      461,
-      266
+      756.84,
+      404.88,
+      816.36,
+      409.08
     ],
     [
-      577,
-      320,
-      921,
-      334
+      820.68,
+      404.88,
+      883.08,
+      409.08
     ],
     [
-      69,
-      357,
-      83,
-      420
+      571.92,
+      417.6,
+      576.24,
+      440.28
     ],
     [
-      177,
-      643,
-      188,
-      767
-    ],
-    [
-      249,
-      815,
-      263,
-      935
-    ],
-    [
-      99,
-      815,
-      111,
-      945
+      611.64,
+      521.76,
+      615.84,
+      567.12
     ]
   ],
   "doors": [
     {
       "name": "衛浴 A 門",
       "rect": [
-        215,
-        488,
-        227,
-        546
+        625.8,
+        464.4,
+        628.68,
+        485.64
       ],
       "h": [
-        221,
-        488
+        627.24,
+        464.4
       ],
       "c": [
         0,
@@ -684,19 +836,41 @@
         -1,
         0
       ],
-      "len": 58
+      "len": 21.24
     },
     {
-      "name": "房間 A 門",
+      "name": "主臥室門",
       "rect": [
-        514,
-        610,
-        526,
-        695
+        709.44,
+        531.0,
+        734.88,
+        533.88
       ],
       "h": [
-        520,
-        695
+        734.88,
+        532.44
+      ],
+      "c": [
+        -1,
+        0
+      ],
+      "o": [
+        0,
+        -1
+      ],
+      "len": 25.44
+    },
+    {
+      "name": "臥室（圖中）門",
+      "rect": [
+        706.56,
+        536.64,
+        709.44,
+        562.2
+      ],
+      "h": [
+        708.0,
+        562.2
       ],
       "c": [
         0,
@@ -706,41 +880,19 @@
         -1,
         0
       ],
-      "len": 85
+      "len": 25.56
     },
     {
-      "name": "房間 B 門",
+      "name": "臥室（圖下）門",
       "rect": [
-        437,
-        688,
-        449,
-        754
+        732.12,
+        579.24,
+        757.56,
+        582.0
       ],
       "h": [
-        443,
-        754
-      ],
-      "c": [
-        0,
-        -1
-      ],
-      "o": [
-        -1,
-        0
-      ],
-      "len": 66
-    },
-    {
-      "name": "房間 C 門",
-      "rect": [
-        509,
-        801,
-        576,
-        814
-      ],
-      "h": [
-        576,
-        807
+        757.56,
+        580.62
       ],
       "c": [
         -1,
@@ -750,41 +902,41 @@
         0,
         1
       ],
-      "len": 67
+      "len": 25.44
     },
     {
       "name": "衛浴 B 門",
       "rect": [
-        583,
-        814,
-        595,
-        870
+        763.32,
+        579.24,
+        784.56,
+        582.0
       ],
       "h": [
-        589,
-        814
+        763.32,
+        580.62
       ],
       "c": [
-        0,
-        1
-      ],
-      "o": [
         1,
         0
       ],
-      "len": 56
+      "o": [
+        0,
+        1
+      ],
+      "len": 21.24
     },
     {
-      "name": "衛浴 C 門",
+      "name": "衛浴 C 無門洞口",
       "rect": [
-        831,
-        814,
-        844,
-        868
+        851.16,
+        605.4,
+        853.92,
+        626.64
       ],
       "h": [
-        837,
-        814
+        852.54,
+        605.4
       ],
       "c": [
         0,
@@ -794,19 +946,23 @@
         -1,
         0
       ],
-      "len": 54
+      "len": 21.24,
+      "openingOnly": true,
+      "widthMm": 750,
+      "heightMm": 2100,
+      "provenance": "Explicit 75×210 cm reserved opening; frame and leaf canceled"
     },
     {
       "name": "入口門",
       "rect": [
-        866,
-        1042,
-        957,
-        1055
+        861.0,
+        667.08,
+        896.52,
+        671.28
       ],
       "h": [
-        957,
-        1048
+        896.52,
+        669.18
       ],
       "c": [
         -1,
@@ -816,7 +972,7 @@
         0,
         -1
       ],
-      "len": 91,
+      "len": 35.52,
       "entry": true
     }
   ],
@@ -825,320 +981,354 @@
     {
       "id": "island",
       "type": "island",
-      "name": "原圖中島｜樣品屋白色瀑布側板外觀",
-      "cx": 674,
-      "cy": 538,
-      "w": 312,
-      "d": 70,
+      "name": "廚房長台／中島（圖示）",
+      "cx": 792.3,
+      "cy": 482.82,
+      "w": 113.4,
+      "d": 25.56,
       "rot": 90,
-      "color": "#ddd7cf"
+      "color": "#ddd7cf",
+      "provenance": "Latest PDF plan symbol, vector-traced"
     },
     {
       "id": "hob",
       "type": "stove",
-      "name": "爐具位置*",
-      "cx": 662,
-      "cy": 419,
-      "w": 41,
-      "d": 46,
+      "name": "爐具圖示位置",
+      "cx": 788.22,
+      "cy": 440.28,
+      "w": 14.76,
+      "d": 16.8,
       "rot": 0,
-      "color": "#333333"
+      "color": "#333333",
+      "provenance": "Latest PDF plan symbol, vector-traced"
     },
     {
       "id": "sink",
       "type": "ksink",
-      "name": "水槽位置*",
-      "cx": 662,
-      "cy": 522,
-      "w": 48,
-      "d": 42,
+      "name": "廚房水槽圖示位置",
+      "cx": 788.1,
+      "cy": 477.72,
+      "w": 18.72,
+      "d": 12.84,
       "rot": 90,
-      "color": "#d3dce0"
+      "color": "#d3dce0",
+      "provenance": "Latest PDF plan symbol, vector-traced"
     },
     {
       "id": "cabinet",
       "type": "wardrobe",
-      "name": "原圖長櫃｜樣品屋灰米高櫃外觀",
-      "cx": 547,
-      "cy": 526,
-      "w": 334,
-      "d": 47,
+      "name": "廚房壁側長櫃（圖示）",
+      "cx": 746.22,
+      "cy": 480.0,
+      "w": 119.04,
+      "d": 16.92,
       "rot": 270,
-      "color": "#c8c0b6"
+      "color": "#c8c0b6",
+      "provenance": "Latest PDF plan symbol, vector-traced"
     },
     {
       "id": "tub",
       "type": "bathtub",
-      "name": "浴缸位置*",
-      "cx": 155,
-      "cy": 363,
-      "w": 110,
-      "d": 45,
+      "name": "主浴浴缸圖示位置",
+      "cx": 601.68,
+      "cy": 419.04,
+      "w": 45.36,
+      "d": 18.48,
       "rot": 0,
-      "color": "#f0f1ef"
+      "color": "#f0f1ef",
+      "provenance": "Latest PDF plan symbol, vector-traced"
     },
     {
       "id": "wc-a",
       "type": "toilet",
-      "name": "馬桶 A*",
-      "cx": 108,
-      "cy": 504,
-      "w": 36,
-      "d": 56,
+      "name": "主浴馬桶圖示位置",
+      "cx": 585.84,
+      "cy": 469.32,
+      "w": 10.56,
+      "d": 19.2,
       "rot": 270,
-      "color": "#ffffff"
+      "color": "#ffffff",
+      "provenance": "Latest PDF plan symbol, vector-traced"
     },
     {
       "id": "basin-a",
       "type": "vanity",
-      "name": "洗手台 A*",
-      "cx": 165,
-      "cy": 579,
-      "w": 60,
-      "d": 38,
+      "name": "主浴面盆圖示位置",
+      "cx": 607.68,
+      "cy": 496.92,
+      "w": 15.0,
+      "d": 12.96,
       "rot": 180,
-      "color": "#dedbd3"
+      "color": "#dedbd3",
+      "provenance": "Latest PDF plan symbol, vector-traced"
     },
     {
       "id": "wc-b",
       "type": "toilet",
-      "name": "馬桶 B*",
-      "cx": 670,
-      "cy": 904,
-      "w": 36,
-      "d": 56,
+      "name": "次浴馬桶圖示位置",
+      "cx": 791.28,
+      "cy": 616.02,
+      "w": 10.44,
+      "d": 19.2,
       "rot": 90,
-      "color": "#ffffff"
+      "color": "#ffffff",
+      "provenance": "Latest PDF plan symbol, vector-traced"
     },
     {
       "id": "basin-b",
       "type": "vanity",
-      "name": "洗手台 B*",
-      "cx": 681,
-      "cy": 840,
-      "w": 55,
-      "d": 35,
+      "name": "次浴面盆圖示位置",
+      "cx": 798.9,
+      "cy": 593.34,
+      "w": 22.68,
+      "d": 13.8,
       "rot": 90,
-      "color": "#dedbd3"
-    },
-    {
-      "id": "wc-c",
-      "type": "toilet",
-      "name": "馬桶 C*",
-      "cx": 754,
-      "cy": 840,
-      "w": 36,
-      "d": 56,
-      "rot": 270,
-      "color": "#ffffff"
-    },
-    {
-      "id": "basin-c",
-      "type": "vanity",
-      "name": "洗手台 C*",
-      "cx": 750,
-      "cy": 902,
-      "w": 52,
-      "d": 35,
-      "rot": 270,
-      "color": "#dedbd3"
+      "color": "#dedbd3",
+      "provenance": "Latest PDF plan symbol, vector-traced"
     },
     {
       "id": "v2-bar-1",
       "type": "barstool",
       "name": "樣品屋吧椅 1*",
-      "cx": 738,
-      "cy": 452,
-      "w": 38,
-      "d": 38,
+      "cx": 815.6319,
+      "cy": 451.80258,
+      "w": 13.46457,
+      "d": 13.46457,
       "rot": 0,
-      "color": "#8a7762"
+      "color": "#8a7762",
+      "proposal": true,
+      "provenance": "Photo proposal; former nominal physical size retained; position mapped to latest public-area bounds"
     },
     {
       "id": "v2-bar-2",
       "type": "barstool",
       "name": "樣品屋吧椅 2*",
-      "cx": 738,
-      "cy": 540,
-      "w": 38,
-      "d": 38,
+      "cx": 815.6319,
+      "cy": 483.93579,
+      "w": 13.46457,
+      "d": 13.46457,
       "rot": 0,
-      "color": "#8a7762"
+      "color": "#8a7762",
+      "proposal": true,
+      "provenance": "Photo proposal; former nominal physical size retained; position mapped to latest public-area bounds"
     },
     {
       "id": "v2-bar-3",
       "type": "barstool",
       "name": "樣品屋吧椅 3*",
-      "cx": 738,
-      "cy": 628,
-      "w": 38,
-      "d": 38,
+      "cx": 815.6319,
+      "cy": 516.06901,
+      "w": 13.46457,
+      "d": 13.46457,
       "rot": 0,
-      "color": "#8a7762"
+      "color": "#8a7762",
+      "proposal": true,
+      "provenance": "Photo proposal; former nominal physical size retained; position mapped to latest public-area bounds"
     },
     {
       "id": "v2-dining",
       "type": "table",
       "name": "樣品屋白色餐桌*",
-      "cx": 838,
-      "cy": 405,
-      "w": 106,
-      "d": 62,
+      "cx": 852.36392,
+      "cy": 434.64052,
+      "w": 37.55906,
+      "d": 21.9685,
       "rot": 0,
-      "color": "#eeeae3"
+      "color": "#eeeae3",
+      "proposal": true,
+      "provenance": "Photo proposal; former nominal physical size retained; position mapped to latest public-area bounds"
     },
     {
       "id": "v2-chair-1",
       "type": "chair",
       "name": "餐椅 1*",
-      "cx": 796,
-      "cy": 361,
-      "w": 36,
-      "d": 39,
+      "cx": 836.93647,
+      "cy": 418.57391,
+      "w": 12.75591,
+      "d": 13.8189,
       "rot": 0,
-      "color": "#aaa39b"
+      "color": "#aaa39b",
+      "proposal": true,
+      "provenance": "Photo proposal; former nominal physical size retained; position mapped to latest public-area bounds"
     },
     {
       "id": "v2-chair-2",
       "type": "chair",
       "name": "餐椅 2*",
-      "cx": 838,
-      "cy": 361,
-      "w": 36,
-      "d": 39,
+      "cx": 852.36392,
+      "cy": 418.57391,
+      "w": 12.75591,
+      "d": 13.8189,
       "rot": 0,
-      "color": "#aaa39b"
+      "color": "#aaa39b",
+      "proposal": true,
+      "provenance": "Photo proposal; former nominal physical size retained; position mapped to latest public-area bounds"
     },
     {
       "id": "v2-chair-3",
       "type": "chair",
       "name": "餐椅 3*",
-      "cx": 880,
-      "cy": 361,
-      "w": 36,
-      "d": 39,
+      "cx": 867.79137,
+      "cy": 418.57391,
+      "w": 12.75591,
+      "d": 13.8189,
       "rot": 0,
-      "color": "#aaa39b"
+      "color": "#aaa39b",
+      "proposal": true,
+      "provenance": "Photo proposal; former nominal physical size retained; position mapped to latest public-area bounds"
     },
     {
       "id": "v2-chair-4",
       "type": "chair",
       "name": "餐椅 4*",
-      "cx": 796,
-      "cy": 450,
-      "w": 36,
-      "d": 39,
+      "cx": 836.93647,
+      "cy": 451.07227,
+      "w": 12.75591,
+      "d": 13.8189,
       "rot": 180,
-      "color": "#77716b"
+      "color": "#77716b",
+      "proposal": true,
+      "provenance": "Photo proposal; former nominal physical size retained; position mapped to latest public-area bounds"
     },
     {
       "id": "v2-chair-5",
       "type": "chair",
       "name": "餐椅 5*",
-      "cx": 838,
-      "cy": 450,
-      "w": 36,
-      "d": 39,
+      "cx": 852.36392,
+      "cy": 451.07227,
+      "w": 12.75591,
+      "d": 13.8189,
       "rot": 180,
-      "color": "#77716b"
+      "color": "#77716b",
+      "proposal": true,
+      "provenance": "Photo proposal; former nominal physical size retained; position mapped to latest public-area bounds"
     },
     {
       "id": "v2-chair-6",
       "type": "chair",
       "name": "餐椅 6*",
-      "cx": 880,
-      "cy": 450,
-      "w": 36,
-      "d": 39,
+      "cx": 867.79137,
+      "cy": 451.07227,
+      "w": 12.75591,
+      "d": 13.8189,
       "rot": 180,
-      "color": "#77716b"
+      "color": "#77716b",
+      "proposal": true,
+      "provenance": "Photo proposal; former nominal physical size retained; position mapped to latest public-area bounds"
     },
     {
       "id": "v2-rug",
       "type": "rug",
       "name": "客廳灰米地毯*",
-      "cx": 878,
-      "cy": 625,
-      "w": 168,
-      "d": 144,
+      "cx": 867.05673,
+      "cy": 514.97356,
+      "w": 59.52756,
+      "d": 51.02362,
       "rot": 90,
-      "color": "#c6c0b6"
+      "color": "#c6c0b6",
+      "proposal": true,
+      "provenance": "Photo proposal; former nominal physical size retained; position mapped to latest public-area bounds"
     },
     {
       "id": "v2-sofa",
       "type": "sofa",
       "name": "客廳米灰三人沙發*",
-      "cx": 800,
-      "cy": 625,
-      "w": 192,
-      "d": 72,
-      "rot": 90,
-      "color": "#d1cbc2"
+      "cx": 838.40575,
+      "cy": 514.97356,
+      "w": 68.0315,
+      "d": 25.51181,
+      "rot": 270,
+      "color": "#d1cbc2",
+      "proposal": true,
+      "provenance": "Photo proposal; former nominal physical size retained; position mapped to latest public-area bounds; user requested seat front facing TV, rotation corrected to270 degrees"
     },
     {
       "id": "v2-armchair",
       "type": "armchair",
       "name": "棕色外背單椅*",
-      "cx": 856,
-      "cy": 754,
-      "w": 61,
-      "d": 61,
+      "cx": 858.97569,
+      "cy": 562.07794,
+      "w": 21.61417,
+      "d": 21.61417,
       "rot": 330,
-      "color": "#a67861"
+      "color": "#a67861",
+      "proposal": true,
+      "provenance": "Photo proposal; former nominal physical size retained; position mapped to latest public-area bounds"
     },
     {
       "id": "v2-coffee-1",
       "type": "coffeetable",
       "name": "深色石紋茶几*",
-      "cx": 885,
-      "cy": 596,
-      "w": 74,
-      "d": 43,
+      "cx": 869.62797,
+      "cy": 504.38421,
+      "w": 26.22047,
+      "d": 15.23622,
       "rot": 90,
-      "color": "#34343a"
+      "color": "#34343a",
+      "proposal": true,
+      "provenance": "Photo proposal; former nominal physical size retained; position mapped to latest public-area bounds"
     },
     {
       "id": "v2-coffee-2",
       "type": "sidetable",
       "name": "深色副茶几*",
-      "cx": 912,
-      "cy": 660,
-      "w": 43,
-      "d": 43,
+      "cx": 879.54562,
+      "cy": 527.75382,
+      "w": 15.23622,
+      "d": 15.23622,
       "rot": 0,
-      "color": "#27282d"
+      "color": "#27282d",
+      "proposal": true,
+      "provenance": "Photo proposal; former nominal physical size retained; position mapped to latest public-area bounds"
     },
     {
       "id": "v2-tvstand",
       "type": "tvstand",
       "name": "深色懸浮電視櫃*",
-      "cx": 970,
-      "cy": 625,
-      "w": 190,
-      "d": 26,
+      "cx": 900.8502,
+      "cy": 514.97356,
+      "w": 67.32283,
+      "d": 9.2126,
       "rot": 90,
-      "color": "#292827"
+      "color": "#292827",
+      "proposal": true,
+      "provenance": "Photo proposal; former nominal physical size retained; position mapped to latest public-area bounds",
+      "screenProjectionCorrectionM": 0.045
     },
     {
       "id": "v2-plant",
       "type": "plant",
       "name": "公共區植栽*",
-      "cx": 947,
-      "cy": 756,
-      "w": 46,
-      "d": 46,
+      "cx": 892.40183,
+      "cy": 562.80824,
+      "w": 16.29921,
+      "d": 16.29921,
       "rot": 0,
-      "color": "#728d62"
+      "color": "#728d62",
+      "proposal": true,
+      "provenance": "Photo proposal; former nominal physical size retained; position mapped to latest public-area bounds"
+    },
+    {
+      "id": "cabinet-top",
+      "type": "wardrobe",
+      "name": "廚房上端櫃／箱體（圖示）",
+      "cx": 747.0,
+      "cy": 414.78,
+      "w": 18.48,
+      "d": 11.4,
+      "rot": 0,
+      "color": "#c8c0b6",
+      "provenance": "Latest PDF upper cabinet/box outline; actual function and height unconfirmed"
     }
   ],
   "walk": {
     "start": [
-      910,
-      1078
+      879,
+      680
     ],
     "target": [
-      910,
-      890
+      879,
+      630
     ]
   },
   "designV2": {
@@ -1151,19 +1341,116 @@
     ],
     "publicArea": {
       "tvWall": {
-        "x": 981,
-        "y": 625,
-        "length": 205,
+        "x": 904.8907189542483,
+        "y": 514.9735622317596,
+        "length": 72.63779527559056,
         "heightM": 2.34
       },
       "ceiling": {
-        "x0": 535,
-        "y0": 340,
-        "x1": 980,
-        "y1": 795,
+        "x0": 741.0658823529411,
+        "y0": 410.9057510729614,
+        "x1": 904.5233986928105,
+        "y1": 577.0490987124464,
         "soffitM": 0.3,
         "dropM": 0.16
       }
+    },
+    "remap": {
+      "oldTraceXRange": [
+        526,
+        985
+      ],
+      "newPdfXRange": [
+        737.76,
+        906.36
+      ],
+      "oldTraceYRange": [
+        335,
+        801
+      ],
+      "newPdfYRange": [
+        409.08,
+        579.24
+      ],
+      "fixtureSizePolicy": "Retain former assumed 12.5mm/trace physical furniture sizes; positions are remapped proposals"
     }
-  }
+  },
+  "canceledItems": [
+    "Guest-bath door frame and leaf",
+    "Guest-bath basin and vanity",
+    "Guest-bath basin faucet",
+    "Guest-bath demisting mirror",
+    "Guest-bath shower sliding door",
+    "Guest-bath shower faucet",
+    "Guest-bath toilet"
+  ],
+  "unmodeledUnknowns": [
+    "North orientation",
+    "Actual wall, column and beam heights",
+    "Actual window form/opening mode and sill/head",
+    "Balcony rail material and actual height",
+    "Cross-marked upper exterior zone use",
+    "Live pipe routes and hidden services"
+  ],
+  "vectorTraceNotes": {
+    "roomRoleMapping": {
+      "a": "主臥室",
+      "b": "臥室（圖中）",
+      "c": "臥室（圖下）",
+      "utility": "陽台（圖左下）",
+      "outside-a": "宜居陽台",
+      "outside-b": "陽台（圖右上）"
+    },
+    "lowWalls": "Exterior/balcony parapet representations; height 1.0 m is a display assumption, not a measured value",
+    "curvedBalcony": "Floor follows vector inner outline; curved edge rail not authored because height/type unavailable",
+    "structuralClasses": "b/e/n code preserves renderer categories; not structural engineering certification"
+  },
+  "userRevisions": [
+    {
+      "date": "2026-10-01",
+      "changes": [
+        "Rotate sofa seat front toward TV without moving footprint",
+        "Convert lower bedroom window to floor-level work balcony access",
+        "Convert master bedroom window to floor-level balcony access"
+      ],
+      "scope": "User requested; existing opening widths retained; door type and height provisional",
+      "technicalCorrection": "TV screen and chassis moved 45mm toward room to clear existing stone wall cladding; console and all fixture anchors unchanged"
+    }
+  ],
+  "balconyDoors": [
+    {
+      "id": "master-balcony",
+      "name": "主臥至宜居陽台落地門",
+      "rect": [
+        647.04,
+        379.32,
+        715.08,
+        383.64
+      ],
+      "sourceWindowIndex": 0,
+      "roomId": "a",
+      "balconyId": "outside-a",
+      "headMm": 2400,
+      "sillMm": 0,
+      "style": "two-panel sliding, displayed open",
+      "provisional": true
+    },
+    {
+      "id": "work-balcony",
+      "name": "下方臥室至工作陽台落地門",
+      "rect": [
+        637.8,
+        583.44,
+        642.12,
+        628.8
+      ],
+      "sourceWindowIndex": 5,
+      "roomId": "c",
+      "balconyId": "utility",
+      "headMm": 2400,
+      "sillMm": 0,
+      "style": "two-panel sliding, displayed open",
+      "provisional": true
+    }
+  ]
 }

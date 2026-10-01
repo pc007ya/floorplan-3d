@@ -1,16 +1,16 @@
 import {chromium} from 'playwright';import {resolve} from 'node:path';import {pathToFileURL} from 'node:url';import assert from 'node:assert/strict';import {mkdir,writeFile} from 'node:fs/promises';
-const browser=await chromium.launch({headless:true,args:['--no-sandbox','--enable-unsafe-swiftshader','--use-gl=angle','--use-angle=swiftshader','--disable-dev-shm-usage']});
+const browser=await chromium.launch({headless:true,...(process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE?{executablePath:process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE}:{}),args:['--no-sandbox','--enable-unsafe-swiftshader','--use-gl=angle','--use-angle=swiftshader','--disable-dev-shm-usage']});
 try{
  const page=await browser.newPage({viewport:{width:1600,height:1000}}),errors=[];
  page.on('pageerror',e=>errors.push(e.message));
  await page.goto('http://127.0.0.1:8000/dist/',{waitUntil:'networkidle'});
  await page.waitForFunction(()=>window.__homeReady && window.__homeHealth?.().ready,null,{timeout:45000});
  await page.waitForTimeout(1200);
- const health=await page.evaluate(()=>window.__homeHealth());assert.equal(health.source.id,'home-trace-v1');assert.equal(health.rooms.length,11);assert.equal(health.design,'showhouse-public-v2');assert.ok(health.furniture>=28);assert.ok(health.width>100&&health.height>100);assert.deepEqual(health.demolished,[]);
+ const health=await page.evaluate(()=>window.__homeHealth());assert.equal(health.source.id,'latest-pdf-vector-trace');assert.equal(health.rooms.length,11);assert.equal(health.design,'showhouse-public-v2');assert.ok(health.furniture===27);assert.ok(health.width>100&&health.height>100);assert.deepEqual(health.demolished,[]);
  await page.evaluate(()=>setView('2d'));await page.waitForTimeout(1500);
  assert.equal(await page.locator('#gRooms polygon').count(),11);
  await page.evaluate(()=>setTool('demolish'));assert.equal(await page.evaluate(()=>ui.tool),'select');
- await page.evaluate(()=>select({kind:'room',id:'a'}));assert.ok((await page.locator('#panel').innerText()).includes('待校正'));
+ await page.evaluate(()=>select({kind:'room',id:'a'}));assert.ok((await page.locator('#panel').innerText()).includes('非實測'));
  await page.evaluate(()=>select(null));
  await mkdir('artifacts',{recursive:true});await page.screenshot({path:'artifacts/home-2d.png'});
  await page.evaluate(()=>setView('3d'));await page.waitForTimeout(2500);await page.screenshot({path:'artifacts/home-3d.png'});
