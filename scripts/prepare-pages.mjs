@@ -29,6 +29,15 @@ const metadata = {
   originalDrawingsIncluded: false,
   measurementsVerified: false
 };
+// applyStaticLang() overwrites <title> at startup and every language switch.
+// Update that exact hook as well as the static title; do not weaken the browser test.
+const titleZh = `室內設計 3D｜V${metadata.bathroomVersion} 衛浴試配`;
+const titleEn = `Interior 3D | V${metadata.bathroomVersion} Bathroom Preview`;
+const runtimeTitle = "document.title = tr('户型装修设计', 'Floor Plan Designer');";
+assert.equal(html.split(runtimeTitle).length - 1, 1, 'Expected exactly one upstream language-title hook');
+assert.equal((html.match(/<title>[^<]*<\/title>/g) || []).length, 1, 'Expected exactly one title element');
+html = html.replace(runtimeTitle, `document.title = tr(${JSON.stringify(titleZh)}, ${JSON.stringify(titleEn)});`);
+html = html.replace(/<title>[^<]*<\/title>/, `<title>${titleZh}</title>`);
 // Discourage indexing; this is not authentication and does not make the site private.
 html = html.replace('</head>', `<meta name="robots" content="noindex,nofollow,noarchive">\n<meta name="floorplan-source-commit" content="${sourceCommit}">\n</head>`);
 await rm('_site', {recursive:true, force:true});
