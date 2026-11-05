@@ -1,0 +1,626 @@
+{
+  "schemaVersion": 1,
+  "id": "abo-glb-furniture-references",
+  "kind": "furniture-reference-catalog",
+  "status": "reference-only",
+  "runtimeEnabled": false,
+  "verifiedAt": "2026-11-05",
+  "source": {
+    "dataset": "codepawl/abo-glb",
+    "url": "https://huggingface.co/datasets/codepawl/abo-glb",
+    "revision": "c6ac66142ecec2a2973b6e00072ec74940e1bec4",
+    "metadataUrl": "https://huggingface.co/datasets/codepawl/abo-glb/resolve/c6ac66142ecec2a2973b6e00072ec74940e1bec4/metadata.jsonl",
+    "metadataSha256": "82510ccf84959cc2fed814a7db078575059454377a89b13cc18c49224dac9227",
+    "modelCount": 7953,
+    "originalUrl": "https://amazon-berkeley-objects.s3.amazonaws.com/index.html",
+    "upstreamReadmeUrl": "https://amazon-berkeley-objects.s3.amazonaws.com/README.md"
+  },
+  "license": {
+    "spdx": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/",
+    "textPath": "../../docs/licenses/abo-CC-BY-4.0.txt",
+    "attributionPath": "../../docs/abo-attribution.md",
+    "creator": "Amazon.com",
+    "adapter": "CodePawl",
+    "licenseSha256": "419896aea50c15d6e40c5b4baf4bd346f78223b9a354c7357ad00262afdc08ec"
+  },
+  "integration": {
+    "homePath": "data/home.json",
+    "homeRevision": "2026-10-01-blender-r02-sofa-balcony-access",
+    "units": "metres",
+    "axes": [
+      "x-width",
+      "y-height",
+      "z-depth"
+    ],
+    "automaticPlacement": false,
+    "geometryChanged": false,
+    "furnitureReplaced": false,
+    "scalePolicy": "Keep source scale. Compare measured bounds and catalog dimensions; no automatic stretch-to-fit.",
+    "requiredExtensions": [
+      "EXT_meshopt_compression",
+      "EXT_texture_webp",
+      "KHR_mesh_quantization"
+    ]
+  },
+  "assets": [
+    {
+      "id": "B072M1WJF2",
+      "labelZh": "沙發 A｜奶油白低背",
+      "category": "sofa",
+      "name": "Amazon Brand – Rivet Midtown Contemporary Upholstered Sofa Couch, 92.1\"W, Cream",
+      "brand": "Rivet",
+      "sourceProductType": "sofa",
+      "color": "Cream",
+      "material": "hardwood frame/resilient cushions",
+      "fixtureIds": [
+        "v2-sofa"
+      ],
+      "useNote": "低背、細腳與淺色布面可作現有米灰沙發的外觀候選；不表示指定三人座規格。",
+      "sizeMetres": {
+        "width": 2.3008,
+        "height": 0.8626,
+        "depth": 0.9571
+      },
+      "boundsMinMetres": [
+        -1.1504,
+        0,
+        -0.4694
+      ],
+      "catalogDimensionsCm": {
+        "length": 233.9,
+        "width": 94,
+        "height": 80
+      },
+      "triangles": 28150,
+      "glb": {
+        "path": "objects/B072M1WJF2/B072M1WJF2.glb",
+        "url": "https://huggingface.co/datasets/codepawl/abo-glb/resolve/c6ac66142ecec2a2973b6e00072ec74940e1bec4/objects/B072M1WJF2/B072M1WJF2.glb",
+        "bytes": 616540,
+        "sha256": "daa59c49c0879636487e097ad6a0946df2aa20653efd9ab3552925e89d568cc2"
+      },
+      "thumbnail": {
+        "url": "https://huggingface.co/datasets/codepawl/abo-glb/resolve/c6ac66142ecec2a2973b6e00072ec74940e1bec4/thumbs/B072M1WJF2.webp",
+        "bytes": 5954,
+        "sha256": "40ebd61f1355e8a7500e78886eb6875f9013aef03c377885a65cb05cd401fd7d"
+      },
+      "verification": {
+        "thumbnailReviewed": true,
+        "glbHeaderValidated": true,
+        "byteSizeMatchesMetadata": true,
+        "scenePlacementTested": false
+      }
+    },
+    {
+      "id": "B072635G2P",
+      "labelZh": "沙發 B｜灰米厚坐墊",
+      "category": "sofa",
+      "name": "Amazon Brand – Stone & Beam Hoffman Down-Filled Performance Fabric Sofa Couch, 97\"W, Grey Tweed",
+      "brand": "Stone & Beam",
+      "sourceProductType": "ottoman",
+      "color": "Grey Tweed",
+      "material": "Wood frame; Polypropylene fabric",
+      "fixtureIds": [
+        "v2-sofa"
+      ],
+      "useNote": "灰米織布與厚坐墊為另一種輪廓選項；來源品名與模型外框有差異，需重核尺寸。",
+      "sizeMetres": {
+        "width": 2.2989,
+        "height": 0.9225,
+        "depth": 1.0397
+      },
+      "boundsMinMetres": [
+        -1.1494,
+        0,
+        -0.4944
+      ],
+      "catalogDimensionsCm": {
+        "length": 246.4,
+        "width": 100.3,
+        "height": 94
+      },
+      "triangles": 32452,
+      "glb": {
+        "path": "objects/B072635G2P/B072635G2P.glb",
+        "url": "https://huggingface.co/datasets/codepawl/abo-glb/resolve/c6ac66142ecec2a2973b6e00072ec74940e1bec4/objects/B072635G2P/B072635G2P.glb",
+        "bytes": 2552472,
+        "sha256": "df419d6b9901d4e8501831eb84c4cad93c1961a9b97aeaf423aa03108a2d2ae9"
+      },
+      "thumbnail": {
+        "url": "https://huggingface.co/datasets/codepawl/abo-glb/resolve/c6ac66142ecec2a2973b6e00072ec74940e1bec4/thumbs/B072635G2P.webp",
+        "bytes": 15474,
+        "sha256": "5344c2cb34c02124b407de15acd51ade0c6b738986fb354b8fe929508e24cfdb"
+      },
+      "verification": {
+        "thumbnailReviewed": true,
+        "glbHeaderValidated": true,
+        "byteSizeMatchesMetadata": true,
+        "scenePlacementTested": false
+      }
+    },
+    {
+      "id": "B075X4F3R5",
+      "labelZh": "單椅 A｜棕皮低扶手",
+      "category": "accent-chair",
+      "name": "Amazon Brand – Rivet Jamie Leather Mid-Century Modern Low Arm Accent Chair, 31\"W, Cognac",
+      "brand": "Rivet",
+      "sourceProductType": "chair",
+      "color": "Cognac",
+      "material": "Leather; hardwood frame",
+      "fixtureIds": [
+        "v2-armchair"
+      ],
+      "useNote": "棕色皮面、低扶手與木腳接近既有暖棕單椅方向。",
+      "sizeMetres": {
+        "width": 0.7529,
+        "height": 0.8829,
+        "depth": 0.8514
+      },
+      "boundsMinMetres": [
+        -0.3764,
+        0,
+        -0.4944
+      ],
+      "catalogDimensionsCm": {
+        "length": 82,
+        "width": 79,
+        "height": 88.9
+      },
+      "triangles": 20582,
+      "glb": {
+        "path": "objects/B075X4F3R5/B075X4F3R5.glb",
+        "url": "https://huggingface.co/datasets/codepawl/abo-glb/resolve/c6ac66142ecec2a2973b6e00072ec74940e1bec4/objects/B075X4F3R5/B075X4F3R5.glb",
+        "bytes": 881584,
+        "sha256": "df740632a23d11c2c558a26367e12dde26ce236168457388635f9c095baada01"
+      },
+      "thumbnail": {
+        "url": "https://huggingface.co/datasets/codepawl/abo-glb/resolve/c6ac66142ecec2a2973b6e00072ec74940e1bec4/thumbs/B075X4F3R5.webp",
+        "bytes": 11212,
+        "sha256": "76dc077401b705520d77791b8ba2cc9ff96ba3f9ec2b2df3a37e2ffcd6a53f4c"
+      },
+      "verification": {
+        "thumbnailReviewed": true,
+        "glbHeaderValidated": true,
+        "byteSizeMatchesMetadata": true,
+        "scenePlacementTested": false
+      }
+    },
+    {
+      "id": "B071J7Q9WN",
+      "labelZh": "單椅 B｜棕皮黑鋼架",
+      "category": "accent-chair",
+      "name": "Amazon Brand – Rivet Summit Mid-Century Modern Top-Grain Leather Steel Armed Accent Chair 27\"W, Cognac",
+      "brand": "Rivet",
+      "sourceProductType": "chair",
+      "color": "Cognac",
+      "material": "Steel",
+      "fixtureIds": [
+        "v2-armchair"
+      ],
+      "useNote": "黑色鋼架與棕皮提供較輕巧、開放的輪廓替代。",
+      "sizeMetres": {
+        "width": 0.6511,
+        "height": 0.7772,
+        "depth": 0.8007
+      },
+      "boundsMinMetres": [
+        -0.3257,
+        0,
+        -0.3733
+      ],
+      "catalogDimensionsCm": {
+        "length": 88.9,
+        "width": 69.1,
+        "height": 70.1
+      },
+      "triangles": 26216,
+      "glb": {
+        "path": "objects/B071J7Q9WN/B071J7Q9WN.glb",
+        "url": "https://huggingface.co/datasets/codepawl/abo-glb/resolve/c6ac66142ecec2a2973b6e00072ec74940e1bec4/objects/B071J7Q9WN/B071J7Q9WN.glb",
+        "bytes": 1824048,
+        "sha256": "7dbe87c9ce2c30a4596b31aa868bff0a9117ab929fa6bd65af349cb8ebbd1ebe"
+      },
+      "thumbnail": {
+        "url": "https://huggingface.co/datasets/codepawl/abo-glb/resolve/c6ac66142ecec2a2973b6e00072ec74940e1bec4/thumbs/B071J7Q9WN.webp",
+        "bytes": 18236,
+        "sha256": "ff6ab2f837b1f5abc7d96d253f5bb501480afd91d8691606a6e007b1effe65fb"
+      },
+      "verification": {
+        "thumbnailReviewed": true,
+        "glbHeaderValidated": true,
+        "byteSizeMatchesMetadata": true,
+        "scenePlacementTested": false
+      }
+    },
+    {
+      "id": "B075YMXWZC",
+      "labelZh": "餐桌｜胡桃木長桌",
+      "category": "dining-table",
+      "name": "Amazon Brand – Rivet Mid-Century Modern Oak Dining Table, 63\"L, Walnut Finish",
+      "brand": "Rivet",
+      "sourceProductType": "table",
+      "color": "Walnut",
+      "material": "Oak",
+      "fixtureIds": [
+        "v2-dining"
+      ],
+      "useNote": "僅作長桌比例與桌腳參考；木色不是既有白色桌面的替代定案，亦不代表已驗證可坐六人。",
+      "sizeMetres": {
+        "width": 1.6089,
+        "height": 0.7555,
+        "depth": 0.8112
+      },
+      "boundsMinMetres": [
+        -0.8036,
+        0,
+        -0.4056
+      ],
+      "catalogDimensionsCm": {
+        "length": 90,
+        "width": 160,
+        "height": 75
+      },
+      "triangles": 1000,
+      "glb": {
+        "path": "objects/B075YMXWZC/B075YMXWZC.glb",
+        "url": "https://huggingface.co/datasets/codepawl/abo-glb/resolve/c6ac66142ecec2a2973b6e00072ec74940e1bec4/objects/B075YMXWZC/B075YMXWZC.glb",
+        "bytes": 822940,
+        "sha256": "f54562173551fe5482b5c506d2b5dce4e7408f49e8185a863b386e6b5597010e"
+      },
+      "thumbnail": {
+        "url": "https://huggingface.co/datasets/codepawl/abo-glb/resolve/c6ac66142ecec2a2973b6e00072ec74940e1bec4/thumbs/B075YMXWZC.webp",
+        "bytes": 9840,
+        "sha256": "d1ac20b4d6179a34e2ad554e0e65a58dddb599c8b4181b65fbb668d1b5295e9b"
+      },
+      "verification": {
+        "thumbnailReviewed": true,
+        "glbHeaderValidated": true,
+        "byteSizeMatchesMetadata": true,
+        "scenePlacementTested": false
+      }
+    },
+    {
+      "id": "B07H37HWNR",
+      "labelZh": "餐椅 A｜灰座黑框",
+      "category": "dining-chair",
+      "name": "Phoenix Home PU Leather Dining Chair Set of 2, 18.11\" Length x 21.65\" Width x 30.7\" Height, Gray",
+      "brand": "Phoenix Home",
+      "sourceProductType": "chair",
+      "color": "Grey",
+      "material": "Metal",
+      "fixtureIds": [
+        "v2-chair-1",
+        "v2-chair-2",
+        "v2-chair-3",
+        "v2-chair-4",
+        "v2-chair-5",
+        "v2-chair-6"
+      ],
+      "useNote": "灰色座背與深色細框較接近現有淺灰餐椅方向；需核對拉椅淨空。",
+      "sizeMetres": {
+        "width": 0.46,
+        "height": 0.7798,
+        "depth": 0.5499
+      },
+      "boundsMinMetres": [
+        -0.2284,
+        0,
+        -0.2736
+      ],
+      "catalogDimensionsCm": {
+        "length": 46,
+        "width": 55,
+        "height": 78
+      },
+      "triangles": 19716,
+      "glb": {
+        "path": "objects/B07H37HWNR/B07H37HWNR.glb",
+        "url": "https://huggingface.co/datasets/codepawl/abo-glb/resolve/c6ac66142ecec2a2973b6e00072ec74940e1bec4/objects/B07H37HWNR/B07H37HWNR.glb",
+        "bytes": 1458684,
+        "sha256": "9d776172e5eaa65e079420d7d5244ad92ab563a0814549f3c4b96425217bedd6"
+      },
+      "thumbnail": {
+        "url": "https://huggingface.co/datasets/codepawl/abo-glb/resolve/c6ac66142ecec2a2973b6e00072ec74940e1bec4/thumbs/B07H37HWNR.webp",
+        "bytes": 13002,
+        "sha256": "642cca76e55e748866bb81d6c2e5463155dfaffc21919f475157a10b3ed86ae7"
+      },
+      "verification": {
+        "thumbnailReviewed": true,
+        "glbHeaderValidated": true,
+        "byteSizeMatchesMetadata": true,
+        "scenePlacementTested": false
+      }
+    },
+    {
+      "id": "B07HSJSH2Q",
+      "labelZh": "餐椅 B｜白色菱格",
+      "category": "dining-chair",
+      "name": "Amazon Brand – Rivet Vermont Modern Diamond-Stitched Upholstered Dining Chair, 20\"W, Set of 2, Chalk White and Brass",
+      "brand": "Rivet",
+      "sourceProductType": "chair",
+      "color": "Chalk",
+      "material": null,
+      "fixtureIds": [
+        "v2-chair-1",
+        "v2-chair-2",
+        "v2-chair-3",
+        "v2-chair-4",
+        "v2-chair-5",
+        "v2-chair-6"
+      ],
+      "useNote": "淺色菱格座背與金屬框可作風格替代；來源商品為套裝，這裡的 GLB 外框是一張椅子。",
+      "sizeMetres": {
+        "width": 0.5033,
+        "height": 0.9334,
+        "depth": 0.5969
+      },
+      "boundsMinMetres": [
+        -0.2516,
+        0,
+        -0.3163
+      ],
+      "catalogDimensionsCm": {
+        "length": 50.8,
+        "width": 58.4,
+        "height": 88.9
+      },
+      "triangles": 7252,
+      "glb": {
+        "path": "objects/B07HSJSH2Q/B07HSJSH2Q.glb",
+        "url": "https://huggingface.co/datasets/codepawl/abo-glb/resolve/c6ac66142ecec2a2973b6e00072ec74940e1bec4/objects/B07HSJSH2Q/B07HSJSH2Q.glb",
+        "bytes": 1496744,
+        "sha256": "c2148bf3835950d46bdec5d34429ebe00088ec7cce63dbd4943ac8ea76d76aed"
+      },
+      "thumbnail": {
+        "url": "https://huggingface.co/datasets/codepawl/abo-glb/resolve/c6ac66142ecec2a2973b6e00072ec74940e1bec4/thumbs/B07HSJSH2Q.webp",
+        "bytes": 9520,
+        "sha256": "78e4ddbf1d638a26486bf03e5d9ca22d283ee9fc2ab4956443a4969517eceade"
+      },
+      "verification": {
+        "thumbnailReviewed": true,
+        "glbHeaderValidated": true,
+        "byteSizeMatchesMetadata": true,
+        "scenePlacementTested": false
+      }
+    },
+    {
+      "id": "B075YNTYVL",
+      "labelZh": "吧椅 A｜米色木框",
+      "category": "counter-stool",
+      "name": "Amazon Brand – Stone & Beam Burke Modern Wood Kitchen Counter-Height Bar Stool, 40\"H, Hemp Beige",
+      "brand": "Stone & Beam",
+      "sourceProductType": "stool seating",
+      "color": "Hemp",
+      "material": "Fabric",
+      "fixtureIds": [
+        "v2-bar-1",
+        "v2-bar-2",
+        "v2-bar-3"
+      ],
+      "useNote": "米色椅墊搭深木框，參考中島外側椅子；模型總高不等於座高。",
+      "sizeMetres": {
+        "width": 0.4631,
+        "height": 1.0113,
+        "depth": 0.4804
+      },
+      "boundsMinMetres": [
+        -0.2299,
+        0,
+        -0.2471
+      ],
+      "catalogDimensionsCm": {
+        "length": 55.9,
+        "width": 48.3,
+        "height": 101.6
+      },
+      "triangles": 11188,
+      "glb": {
+        "path": "objects/B075YNTYVL/B075YNTYVL.glb",
+        "url": "https://huggingface.co/datasets/codepawl/abo-glb/resolve/c6ac66142ecec2a2973b6e00072ec74940e1bec4/objects/B075YNTYVL/B075YNTYVL.glb",
+        "bytes": 2275236,
+        "sha256": "01cdc4f7434622d663ec6053629fd8f2ac63d3e44c2350b6c0606c79c69d6485"
+      },
+      "thumbnail": {
+        "url": "https://huggingface.co/datasets/codepawl/abo-glb/resolve/c6ac66142ecec2a2973b6e00072ec74940e1bec4/thumbs/B075YNTYVL.webp",
+        "bytes": 12176,
+        "sha256": "3dcfc978f24cde9b2fa90db4afa7374312b37ba0ba3b3946102e4dc5ef572d41"
+      },
+      "verification": {
+        "thumbnailReviewed": true,
+        "glbHeaderValidated": true,
+        "byteSizeMatchesMetadata": true,
+        "scenePlacementTested": false
+      }
+    },
+    {
+      "id": "B075YP32X2",
+      "labelZh": "吧椅 B｜淺灰低背",
+      "category": "counter-stool",
+      "name": "Amazon Brand – Rivet Mid-Century Modern Upholstered Low Back Kitchen Counter Height Stool, 37\"H, Light Grey",
+      "brand": "Rivet",
+      "sourceProductType": "stool seating",
+      "color": "Light Grey",
+      "material": "Fabric",
+      "fixtureIds": [
+        "v2-bar-1",
+        "v2-bar-2",
+        "v2-bar-3"
+      ],
+      "useNote": "淺灰低背、木腳為較簡潔選項；須另外核對座高與檯面底部淨空。",
+      "sizeMetres": {
+        "width": 0.4167,
+        "height": 0.8352,
+        "depth": 0.4586
+      },
+      "boundsMinMetres": [
+        -0.2083,
+        0,
+        -0.238
+      ],
+      "catalogDimensionsCm": {
+        "length": 53.3,
+        "width": 50.8,
+        "height": 94
+      },
+      "triangles": 39704,
+      "glb": {
+        "path": "objects/B075YP32X2/B075YP32X2.glb",
+        "url": "https://huggingface.co/datasets/codepawl/abo-glb/resolve/c6ac66142ecec2a2973b6e00072ec74940e1bec4/objects/B075YP32X2/B075YP32X2.glb",
+        "bytes": 1187084,
+        "sha256": "6d4afab07e8a4aa890661b39e97383aaafdcf0601711afb9c0c58409579ea181"
+      },
+      "thumbnail": {
+        "url": "https://huggingface.co/datasets/codepawl/abo-glb/resolve/c6ac66142ecec2a2973b6e00072ec74940e1bec4/thumbs/B075YP32X2.webp",
+        "bytes": 13610,
+        "sha256": "f281ed222fea696ffe6f545cc7bb4c4d81e3ec3aefb6201d3ad85cfe176e7d93"
+      },
+      "verification": {
+        "thumbnailReviewed": true,
+        "glbHeaderValidated": true,
+        "byteSizeMatchesMetadata": true,
+        "scenePlacementTested": false
+      }
+    },
+    {
+      "id": "B07J29V51Q",
+      "labelZh": "主茶几｜黑色收納",
+      "category": "coffee-table",
+      "name": "AmazonBasics Lift-Top Storage Coffee Table, Black",
+      "brand": "AmazonBasics",
+      "sourceProductType": "table",
+      "color": "Black",
+      "material": "Wood",
+      "fixtureIds": [
+        "v2-coffee-1"
+      ],
+      "useNote": "深色矩形量體與下層收納參考；不是石紋款，升降功能也未驗證為可動機構。",
+      "sizeMetres": {
+        "width": 1.016,
+        "height": 0.4572,
+        "depth": 0.4826
+      },
+      "boundsMinMetres": [
+        -0.5102,
+        0,
+        -0.2423
+      ],
+      "catalogDimensionsCm": {
+        "length": 101.6,
+        "width": 48.3,
+        "height": 45.7
+      },
+      "triangles": 2312,
+      "glb": {
+        "path": "objects/B07J29V51Q/B07J29V51Q.glb",
+        "url": "https://huggingface.co/datasets/codepawl/abo-glb/resolve/c6ac66142ecec2a2973b6e00072ec74940e1bec4/objects/B07J29V51Q/B07J29V51Q.glb",
+        "bytes": 106760,
+        "sha256": "1bcd2454edbad3fd81dab654cb2cb57bfd66c6fa1f23d9ab5e476a240d400c92"
+      },
+      "thumbnail": {
+        "url": "https://huggingface.co/datasets/codepawl/abo-glb/resolve/c6ac66142ecec2a2973b6e00072ec74940e1bec4/thumbs/B07J29V51Q.webp",
+        "bytes": 6660,
+        "sha256": "296250831b5da343bb1b1c43dbb5d1288cfec0ea11ed6979454a59ac06bb0eef"
+      },
+      "verification": {
+        "thumbnailReviewed": true,
+        "glbHeaderValidated": true,
+        "byteSizeMatchesMetadata": true,
+        "scenePlacementTested": false
+      }
+    },
+    {
+      "id": "B07B7GB7BZ",
+      "labelZh": "邊几｜白石紋黑框",
+      "category": "side-table",
+      "name": "Amazon Brand – Rivet Mid-Century Modern White Marble and Metal Side End Table, 17\"W, Black &amp; Marble",
+      "brand": "Rivet",
+      "sourceProductType": "table",
+      "color": "Black",
+      "material": "metal",
+      "fixtureIds": [
+        "v2-coffee-2"
+      ],
+      "useNote": "白石紋與黑色交叉框可作副茶几外觀選項；不自動改動既有深色配色。",
+      "sizeMetres": {
+        "width": 0.4545,
+        "height": 0.4305,
+        "depth": 0.4545
+      },
+      "boundsMinMetres": [
+        -0.2273,
+        0,
+        -0.2273
+      ],
+      "catalogDimensionsCm": {
+        "length": 45.4,
+        "width": 45.4,
+        "height": 43.2
+      },
+      "triangles": 16168,
+      "glb": {
+        "path": "objects/B07B7GB7BZ/B07B7GB7BZ.glb",
+        "url": "https://huggingface.co/datasets/codepawl/abo-glb/resolve/c6ac66142ecec2a2973b6e00072ec74940e1bec4/objects/B07B7GB7BZ/B07B7GB7BZ.glb",
+        "bytes": 202624,
+        "sha256": "88bdab78c0717ac1ce0d7bda1a12a1fe868d5043038410308fcecea25efe625e"
+      },
+      "thumbnail": {
+        "url": "https://huggingface.co/datasets/codepawl/abo-glb/resolve/c6ac66142ecec2a2973b6e00072ec74940e1bec4/thumbs/B07B7GB7BZ.webp",
+        "bytes": 14182,
+        "sha256": "1978f3b2e7177a617b78dc5565b1db7ba05ac2939949291b1b37227fbb96d835"
+      },
+      "verification": {
+        "thumbnailReviewed": true,
+        "glbHeaderValidated": true,
+        "byteSizeMatchesMetadata": true,
+        "scenePlacementTested": false
+      }
+    },
+    {
+      "id": "B071LQHVJZ",
+      "labelZh": "地毯｜米色環紋",
+      "category": "rug",
+      "name": "Amazon Brand – Stone & Beam Contemporary Interlocking Rings Wool Area Rug, 5 x 7 Foot, Beige",
+      "brand": "Stone & Beam",
+      "sourceProductType": "home furniture and decor",
+      "color": "Beige",
+      "material": "wool",
+      "fixtureIds": [
+        "v2-rug"
+      ],
+      "useNote": "低彩度米色環紋作軟裝候選；保持既有地磚，不把地毯當成地坪材質。",
+      "sizeMetres": {
+        "width": 2.1345,
+        "height": 0.0127,
+        "depth": 1.524
+      },
+      "boundsMinMetres": [
+        -1.0673,
+        0,
+        -0.7624
+      ],
+      "catalogDimensionsCm": {
+        "length": 213.4,
+        "width": 152.4,
+        "height": 1.3
+      },
+      "triangles": 1256,
+      "glb": {
+        "path": "objects/B071LQHVJZ/B071LQHVJZ.glb",
+        "url": "https://huggingface.co/datasets/codepawl/abo-glb/resolve/c6ac66142ecec2a2973b6e00072ec74940e1bec4/objects/B071LQHVJZ/B071LQHVJZ.glb",
+        "bytes": 1452760,
+        "sha256": "9ac4021174fe97c8e0e3c1469ec10b3cf78906bd7fb35197005912304cba8717"
+      },
+      "thumbnail": {
+        "url": "https://huggingface.co/datasets/codepawl/abo-glb/resolve/c6ac66142ecec2a2973b6e00072ec74940e1bec4/thumbs/B071LQHVJZ.webp",
+        "bytes": 3550,
+        "sha256": "77bd57565a9e10b4b502b3d465b1a7303c5af65743f37118117539193864d58e"
+      },
+      "verification": {
+        "thumbnailReviewed": true,
+        "glbHeaderValidated": true,
+        "byteSizeMatchesMetadata": true,
+        "scenePlacementTested": false
+      }
+    }
+  ]
+}

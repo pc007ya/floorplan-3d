@@ -27,3 +27,6 @@ tmp/
 # Pages staging output (generated only)
 _site/
 artifacts/
+
+# Optional third-party furniture reference downloads (never runtime input)
+assets/reference-cache/

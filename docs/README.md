@@ -1,5 +1,8 @@
 # 模型文件
 
+- [ABO 家具參考圖冊](abo-furniture-references.md)：12 件已查核的家具來源與縮圖；含選取下載方式，不接上 runtime。
+- [ABO 署名與授權](abo-attribution.md)：Amazon.com／CodePawl 來源、固定版本與 CC BY 4.0 條件。
+
 - [V2.3 衛浴試配](bathrooms-v23.md)：目前已接上引擎的衛浴外觀、材質切換、玻璃隔間提案與離線驗證。
 - [V2 樣品屋逐區規格](showhouse-v2-model-spec.md)：原始規劃與照片索引；各功能實作狀態以版本文件為準。
 - [V2 原始提案 JSON](../data/proposals/showhouse-v2.json)：歷史規劃資料，不可當家具方案匯入，該檔本身不控制運行時。
