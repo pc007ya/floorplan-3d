@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "id": "objaverse-d2b3ba347ffa4623a2ebc066050d8763",
+  "name": "Laptop",
+  "parts": 106,
+  "joints": 0,
+  "matchedUserReference": true,
+  "source": {
+    "dataset": "Sandflow/sand3d-objaverse",
+    "revision": "92dd5858c177734782734c20f20b2de522b229bf",
+    "metadataUrl": "https://sandflow-sand3d-explorer.hf.space/api/object/objaverse-d2b3ba347ffa4623a2ebc066050d8763",
+    "rowUrl": "https://huggingface.co/datasets/Sandflow/sand3d-objaverse/viewer/default/train?row=35451",
+    "usdaUrl": "https://huggingface.co/datasets/Sandflow/sand3d-objaverse/resolve/92dd5858c177734782734c20f20b2de522b229bf/usda/0007/objaverse-d2b3ba347ffa4623a2ebc066050d8763.usda",
+    "usdaBytes": 1346451,
+    "usdaSha256": "9bca0a413f5b86114abdab37ca4b86193f75d11b479c204b752390990f205e00",
+    "glbUrl": "https://sandflow-sand3d-explorer.hf.space/glb/objaverse-d2b3ba347ffa4623a2ebc066050d8763.glb?v=598faf4f72a9",
+    "glbBytes": 360712,
+    "glbSha256": "c1ca61806c3548a215d9ec9a833e7c1263e600df1f81d1932952547b09c3020f",
+    "programSha256": "1b2d7c8f2f8a3a9e02940bbbde14c467299027ff3ba7932bfe176e4fe4b2fca4",
+    "format": "GLB 2.0, 106 meshes, 5 materials, no textures or extensions"
+  },
+  "license": {
+    "dataset": "CC-BY-4.0",
+    "original": "CC-BY-4.0",
+    "status": "ok",
+    "attribution": "\"laptop\" by sangar17, https://sketchfab.com/3d-models/d2b3ba347ffa4623a2ebc066050d8763, CC-BY-4.0; modified: rewritten as a sand3d program",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "textPath": "docs/licenses/sand3d-laptop-CC-BY-4.0.txt",
+    "licenseSha256": "419896aea50c15d6e40c5b4baf4bd346f78223b9a354c7357ad00262afdc08ec",
+    "originalVerificationUrl": "https://api.sketchfab.com/v3/models/d2b3ba347ffa4623a2ebc066050d8763",
+    "originalTitle": "laptop",
+    "originalAuthor": "sangar17",
+    "originalPage": "https://sketchfab.com/3d-models/laptop-d2b3ba347ffa4623a2ebc066050d8763"
+  },
+  "integration": {
+    "type": "sand3d-laptop",
+    "footprintMm": [
+      350,
+      293
+    ],
+    "sourceBoundsMetres": {
+      "width": 0.35000001662410796,
+      "height": 0.2505451726246658,
+      "depth": 0.29283778499975865
+    },
+    "modifications": [
+      "Build-time GLTFLoader conversion to Three ObjectLoader JSON data; all 106 meshes and original transforms retained.",
+      "Centered in X/Z and aligned to the floor; editable footprint, elevation and aluminium tint.",
+      "Screen opening remains fixed; source has no joints."
+    ],
+    "pythonExecuted": false,
+    "runtimeExternalAssets": false,
+    "automaticPlacement": false,
+    "existingFurnitureReplaced": false
+  },
+  "verifiedAt": "2026-11-05"
+}

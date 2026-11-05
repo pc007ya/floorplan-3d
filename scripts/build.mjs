@@ -19,5 +19,7 @@ await writeFile('dist/index.html',html);
 await writeFile('dist/home.json',JSON.stringify(home,null,2));
 await cp('docs/licenses/sand3d-Apache-2.0.txt','dist/SAND3D-LICENSE.txt');
 await cp('docs/sand3d-attribution.md','dist/SAND3D-ATTRIBUTION.md');
+await cp('docs/licenses/sand3d-laptop-CC-BY-4.0.txt','dist/SAND3D-LAPTOP-LICENSE.txt');
+await cp('docs/sand3d-laptop.md','dist/SAND3D-LAPTOP-ATTRIBUTION.md');
 await writeFile('dist/README.txt','V2.3 衛浴試配，非實測／非施工圖。home-3d-offline.html 為離線單檔；index.html 需靜態伺服器。\n請閱讀 docs/bathrooms-v23.md。\n');
 console.log(JSON.stringify({engineBlob:blob,rooms:home.rooms.length,doors:home.doors.length,scale:'UNVERIFIED',output:'dist/index.html'}));

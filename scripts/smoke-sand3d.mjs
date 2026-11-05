@@ -6,6 +6,8 @@ import {mkdir,readFile,writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {SAND3D_CATALOG} from '../js/sand3d-furniture.mjs';
+import {SAND3D_LAPTOP_ENTRY} from '../js/sand3d-laptop.mjs';
+const catalog=[...SAND3D_CATALOG,SAND3D_LAPTOP_ENTRY];
 const browser=await chromium.launch({headless:true,...(process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE?{executablePath:process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE}:{}),args:['--no-sandbox','--enable-unsafe-swiftshader','--use-gl=angle','--use-angle=swiftshader','--disable-dev-shm-usage']});
 const results=[];await mkdir('artifacts/sand3d',{recursive:true});
 const ready=page=>page.waitForFunction(()=>window.__homeReady&&window.__homeHealth?.().ready&&!document.querySelector('#stage').classList.contains('animating'),null,{timeout:90000});
@@ -22,22 +24,22 @@ try{
   assert.equal((await page.evaluate(()=>state.furniture)).length,27);assert.deepEqual(await items(page),[]);
   await page.locator('[data-view="2d"]').click();await page.waitForTimeout(1600);
   const added=[];
-  for(const a of SAND3D_CATALOG){
+  for(const a of catalog){
    await pane(page,'#tgLib');const tile=page.locator('#lib .item').filter({has:page.locator('b',{hasText:a.name})});assert.equal(await tile.count(),1);
    if(mobile)await tile.tap();else await tile.click();
    const f=await selected(page);assert.equal(f.type,a.type);assert.equal(f.w,a.w);assert.equal(f.d,a.d);added.push(f.id);
    assert.ok((await page.locator(`#gFurn [data-fid="${f.id}"]`).innerHTML()).match(/rect|ellipse/));
   }
-  assert.equal((await items(page)).length,6);
-  await pane(page,'#tgPanel');await edit(page,'#fW',480);await edit(page,'#fElevation',740);
+  assert.equal((await items(page)).length,catalog.length);
+  assert.equal((await selected(page)).type,'sand3d-laptop');await pane(page,'#tgPanel');assert.ok((await page.locator('#panel').innerText()).includes('CC-BY-4.0'));await edit(page,'#fW',480);await edit(page,'#fElevation',740);
   await page.locator('#fC').fill('#a45f82');await page.locator('#fC').dispatchEvent('change');
   await page.locator('#aRot').click();let original=await selected(page);assert.equal(original.w,480);assert.equal(original.elevationMm,740);assert.equal(original.color,'#a45f82');assert.equal(original.rot,90);
-  await page.locator('#aDup').click();const duplicate=await selected(page);assert.notEqual(duplicate.id,original.id);assert.equal(duplicate.elevationMm,740);assert.equal((await items(page)).length,7);
-  await page.locator('#aDel').click();assert.equal((await items(page)).length,6);
-  await page.locator('#undo').click();assert.equal((await items(page)).length,7);assert.ok((await items(page)).some(f=>f.id===duplicate.id));
+  await page.locator('#aDup').click();const duplicate=await selected(page);assert.notEqual(duplicate.id,original.id);assert.equal(duplicate.elevationMm,740);assert.equal((await items(page)).length,catalog.length+1);
+  await page.locator('#aDel').click();assert.equal((await items(page)).length,catalog.length);
+  await page.locator('#undo').click();assert.equal((await items(page)).length,catalog.length+1);assert.ok((await items(page)).some(f=>f.id===duplicate.id));
   if(mobile)await pane(page,'#tgPanel',false);
   await page.locator('[data-view="3d"]').click();await ready(page);await page.waitForTimeout(1600);
-  const health=await page.evaluate(()=>window.__homeHealth());assert.equal(health.furniture,34);assert.ok(health.width>100&&health.height>100);
+  const health=await page.evaluate(()=>window.__homeHealth());assert.equal(health.furniture,27+catalog.length+1);assert.ok(health.width>100&&health.height>100);
   const png=await page.evaluate(()=>window.__homeScreenshot());assert.ok(png.length>50000,'Real WebGL screenshot must not be empty');
   await page.screenshot({path:`artifacts/sand3d/${name}-3d.png`});
   const expected=await items(page);await page.reload({waitUntil:'load'});await ready(page);assert.deepEqual(await items(page),expected,'Autosave survives reload');
@@ -49,7 +51,7 @@ try{
   await page.locator('details.menu summary').click();const choose=page.waitForEvent('filechooser');await page.locator('#importJson').click();await (await choose).setFiles({name:'sand3d-roundtrip.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(exported))});await page.waitForFunction(()=>document.querySelector('#toast').textContent.includes('方案已导入'));
   assert.deepEqual(await items(page),expected,'JSON import preserves new types, color, rotation and elevation');
   assert.ok(await page.locator('#sand3d-license').count());assert.deepEqual(errors,[]);if(offline)assert.deepEqual(requests,[]);
-  results.push({name,added,checks:['six real library clicks/taps','2D icons','width/color/elevation edits','rotate','duplicate','delete/undo','WebGL screenshot','autosave/reload','JSON export/import',...(offline?['network disabled','zero HTTP requests']:[])],errors});await context.close();
+  results.push({name,added,checks:['seven real library clicks/taps including screenshot Laptop','2D icons','width/color/elevation edits','rotate','duplicate','delete/undo','WebGL screenshot','autosave/reload','JSON export/import',...(offline?['network disabled','zero HTTP requests']:[])],errors});await context.close();
  }
  await writeFile('artifacts/sand3d/verification.json',JSON.stringify({passed:true,results},null,2));console.log('PASS: Sand3D real library/editor workflows on desktop and offline mobile');
 }finally{await browser.close()}

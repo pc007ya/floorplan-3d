@@ -21,7 +21,7 @@ assert.ok(!/<(?:img|iframe|script)[^>]*\bsrc\s*=\s*["']https?:/i.test(html), 'Un
 
 const metadata = {
   modelId: home.id,
-  sand3d: {exampleRevision:SAND3D_REVISION,libraryItems:SAND3D_CATALOG.length,automaticPlacement:false},
+  sand3d: {exampleRevision:SAND3D_REVISION,libraryItems:SAND3D_CATALOG.length+1,datasetModels:1,laptopSourceId:'objaverse-d2b3ba347ffa4623a2ebc066050d8763',automaticPlacement:false},
   modelRevision: home.revision,
   bathroomVersion: bathroomConfig(home).version,
   geometryCounts: {rooms:home.rooms.length,walls:home.walls.length,windows:home.windows.length,doors:home.doors.length,balconyDoors:(home.balconyDoors||[]).length,fixtures:home.fixtures.length},
@@ -57,7 +57,9 @@ await writeFile('_site/.nojekyll', '');
 await cp('dist/vendor/three/LICENSE', '_site/THREE-LICENSE.txt');
 await cp('docs/licenses/sand3d-Apache-2.0.txt', '_site/SAND3D-LICENSE.txt');
 await cp('docs/sand3d-attribution.md', '_site/SAND3D-ATTRIBUTION.md');
-await writeFile('_site/NOTICE.txt', 'Interactive interior concept model. Measurements and proposed finishes are not verified.\nRenderer derived from wy51ai/floorplan-3d; maintained in pc007ya/floorplan-3d.\nSand3D official example adaptations: SAND3D-ATTRIBUTION.md and SAND3D-LICENSE.txt (Apache-2.0). Changes: local Three.js geometry/materials, backless variants, larger floor lamp.\nThree.js r160 license: THREE-LICENSE.txt. No original photographs or drawing scans are published here.\n');
-const allowed = ['.nojekyll','index.html','home-3d-offline.html','build-info.json','robots.txt','THREE-LICENSE.txt','SAND3D-LICENSE.txt','SAND3D-ATTRIBUTION.md','NOTICE.txt'].sort();
+await cp('docs/licenses/sand3d-laptop-CC-BY-4.0.txt', '_site/SAND3D-LAPTOP-LICENSE.txt');
+await cp('docs/sand3d-laptop.md', '_site/SAND3D-LAPTOP-ATTRIBUTION.md');
+await writeFile('_site/NOTICE.txt', 'Interactive interior concept model. Measurements and proposed finishes are not verified.\nRenderer derived from wy51ai/floorplan-3d; maintained in pc007ya/floorplan-3d.\nSand3D official example adaptations: SAND3D-ATTRIBUTION.md and SAND3D-LICENSE.txt (Apache-2.0). Changes: local Three.js geometry/materials, backless variants, larger floor lamp.\nScreenshot-matched Laptop by sangar17 / Sandflow, CC BY 4.0: SAND3D-LAPTOP-ATTRIBUTION.md and SAND3D-LAPTOP-LICENSE.txt.\nThree.js r160 license: THREE-LICENSE.txt. No original photographs or drawing scans are published here.\n');
+const allowed = ['.nojekyll','index.html','home-3d-offline.html','build-info.json','robots.txt','THREE-LICENSE.txt','SAND3D-LICENSE.txt','SAND3D-ATTRIBUTION.md','SAND3D-LAPTOP-LICENSE.txt','SAND3D-LAPTOP-ATTRIBUTION.md','NOTICE.txt'].sort();
 assert.deepEqual((await readdir('_site')).sort(), allowed);
 console.log(JSON.stringify({output:'_site', files:allowed, ...metadata}));

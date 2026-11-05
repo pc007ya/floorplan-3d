@@ -2,6 +2,8 @@
 
 These six furniture entries are manually reviewed **adaptations of official Sand3D repository examples**, not six separately downloaded dataset objects. They are not exact Blender renders or original exported meshes.
 
+The later screenshot-matched **Laptop** is a separate actual dataset model, with original and reconstruction licenses **CC BY 4.0**. See [Laptop attribution and changes](sand3d-laptop.md). It is not covered by the Apache-only example inventory below.
+
 ## Source and license
 
 - Project: [Sand3D](https://github.com/Sandflow-ai/sand3d), by Sandflow.
