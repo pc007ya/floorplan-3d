@@ -1,5 +1,7 @@
 # 模型文件
 
+- [Sand3D 精選家具](sand3d-furniture.md)：6 件可直接加入的範例轉寫／衍生家具，含離線、保存與來源授權。
+
 - [V2.3 衛浴試配](bathrooms-v23.md)：目前已接上引擎的衛浴外觀、材質切換、玻璃隔間提案與離線驗證。
 - [V2 樣品屋逐區規格](showhouse-v2-model-spec.md)：原始規劃與照片索引；各功能實作狀態以版本文件為準。
 - [V2 原始提案 JSON](../data/proposals/showhouse-v2.json)：歷史規劃資料，不可當家具方案匯入，該檔本身不控制運行時。

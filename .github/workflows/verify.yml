@@ -35,6 +35,7 @@ jobs:
       - run: node scripts/smoke-bathrooms.mjs
       - run: node scripts/smoke-latest-geometry.mjs
       - run: node scripts/smoke-furniture-picking.mjs
+      - run: node scripts/smoke-sand3d.mjs
       - name: Prepare public site (tested model only)
         run: node scripts/prepare-pages.mjs
       - name: Verify GitHub Pages project path

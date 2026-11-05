@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "project": "Sand3D example adaptations for Three.js floorplan",
+  "upstreamRepository": "https://github.com/Sandflow-ai/sand3d",
+  "revision": "0d589a5ba568fd72c8da97f8d039918650608a42",
+  "revisionDate": "2026-11-05T08:28:17Z",
+  "license": "Apache-2.0",
+  "attribution": "Sandflow / Sand3D; Thibault Neveu and Andréa Loy (upstream citation).",
+  "files": [
+    {
+      "upstreamPath": "programs/tufted_chair.py",
+      "localPath": "docs/sources/sand3d/tufted_chair.py",
+      "sourceUrl": "https://github.com/Sandflow-ai/sand3d/blob/0d589a5ba568fd72c8da97f8d039918650608a42/programs/tufted_chair.py",
+      "downloadUrl": "https://raw.githubusercontent.com/Sandflow-ai/sand3d/0d589a5ba568fd72c8da97f8d039918650608a42/programs/tufted_chair.py",
+      "upstreamSha256": "2d202db2b008af4f056d111df1edf2a2e872ace68478add6e447d2a83909f693",
+      "localSha256": "d9e4695aee39239b8776d261683b4de56a64394f4db7a439122af7276846918f",
+      "copyChanges": "One extra trailing newline; source text otherwise unchanged."
+    },
+    {
+      "upstreamPath": "docs/examples/chair.py",
+      "localPath": "docs/sources/sand3d/chair.py",
+      "sourceUrl": "https://github.com/Sandflow-ai/sand3d/blob/0d589a5ba568fd72c8da97f8d039918650608a42/docs/examples/chair.py",
+      "downloadUrl": "https://raw.githubusercontent.com/Sandflow-ai/sand3d/0d589a5ba568fd72c8da97f8d039918650608a42/docs/examples/chair.py",
+      "upstreamSha256": "333fb94d40b190bb4fe44c5caca1e769f1d683714ea11cef7ca7795fa0f757fb",
+      "localSha256": "31bacd473411cb31639f586d47eb7796c4f34a4e1ff0e1c678e2faebd4ff6af5",
+      "copyChanges": "One extra trailing newline; source text otherwise unchanged."
+    },
+    {
+      "upstreamPath": "docs/examples/lamp.py",
+      "localPath": "docs/sources/sand3d/lamp.py",
+      "sourceUrl": "https://github.com/Sandflow-ai/sand3d/blob/0d589a5ba568fd72c8da97f8d039918650608a42/docs/examples/lamp.py",
+      "downloadUrl": "https://raw.githubusercontent.com/Sandflow-ai/sand3d/0d589a5ba568fd72c8da97f8d039918650608a42/docs/examples/lamp.py",
+      "upstreamSha256": "66242f060d86131c7bd72f8bb54b7c8a6f76dda435a36713b6b48a3856a86bcf",
+      "localSha256": "e53ad875b581c42d4316e482c2dd2ccf9b0141dd20dd99c8d5d2686e513ce118",
+      "copyChanges": "One extra trailing newline; source text otherwise unchanged."
+    },
+    {
+      "upstreamPath": "LICENSE",
+      "localPath": "docs/licenses/sand3d-Apache-2.0.txt",
+      "sourceUrl": "https://github.com/Sandflow-ai/sand3d/blob/0d589a5ba568fd72c8da97f8d039918650608a42/LICENSE",
+      "downloadUrl": "https://raw.githubusercontent.com/Sandflow-ai/sand3d/0d589a5ba568fd72c8da97f8d039918650608a42/LICENSE",
+      "upstreamSha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "localSha256": "8c6db340475136df3c1201d458fa5755698eace76e510471ecc9d857d6083dac",
+      "copyChanges": "One extra trailing newline; source text otherwise unchanged."
+    }
+  ],
+  "adaptations": [
+    {
+      "type": "sand3d-tufted-chair",
+      "sourcePath": "programs/tufted_chair.py",
+      "modifications": "Manually approximated rolled tufted back, domed seat, nail trim and tapered legs."
+    },
+    {
+      "type": "sand3d-tufted-ottoman",
+      "sourcePath": "programs/tufted_chair.py",
+      "modifications": "Back omitted to create a matching ottoman; tufted-chair seat and leg construction adapted."
+    },
+    {
+      "type": "sand3d-button-chair",
+      "sourcePath": "docs/examples/chair.py",
+      "modifications": "Button-back dining-chair silhouette adapted with simplified mesh construction."
+    },
+    {
+      "type": "sand3d-tapered-stool",
+      "sourcePath": "docs/examples/chair.py",
+      "modifications": "Back omitted; seat, tapered legs and rails adapted as a stool."
+    },
+    {
+      "type": "sand3d-table-lamp",
+      "sourcePath": "docs/examples/lamp.py",
+      "modifications": "Revolved base, vertical stem and open conical shade approximated with Three.js meshes."
+    },
+    {
+      "type": "sand3d-floor-lamp",
+      "sourcePath": "docs/examples/lamp.py",
+      "modifications": "Table-lamp construction adapted; stem and shade enlarged for a floor lamp."
+    }
+  ],
+  "commonModifications": [
+    "Manually reviewed source translated into Three.js primitive and custom meshes.",
+    "Dimensions and silhouettes approximated; not an exact Blender render or original exported mesh.",
+    "Runtime colors chosen locally.",
+    "Original millimetre/Z-up conventions mapped to app units and Y-up."
+  ],
+  "execution": {
+    "runtimeBlender": false,
+    "dynamicDownloadedCode": false,
+    "downloadedSourceExecuted": false
+  },
+  "datasetStatus": {
+    "used": false,
+    "note": "The upstream README describes separate Hugging Face datasets as CC BY 4.0. Individual dataset cards and object metadata were inaccessible during research. No dataset objects or IDs are claimed here; those terms are not applied to these Apache-2.0 repository examples."
+  }
+}
